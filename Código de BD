@@ -1,0 +1,238 @@
+CREATE DATABASE faculdade;
+USE faculdade;
+
+CREATE TABLE Empresa (
+IDEmpresa int primary key auto_increment,
+    nomeEmpresa varchar(50),
+    responsavel varchar(50)
+);
+
+INSERT INTO Empresa values
+(null, 'Fleury', 'Maria'),
+(null, 'C6', 'Pedro'),
+(null, 'TIVIT', 'Camila'),
+(null, 'Safra', 'Natalia');
+
+SELECT * FROM Empresa;
+
+SELECT nomeEmpresa, responsavel FROM Empresa;
+
+SELECT * FROM Empresa order by nomeEmpresa;
+
+SELECT * FROM Empresa order by responsavel desc;
+
+SELECT * FROM Empresa WHERE nomeEmpresa LIKE '%r%';
+
+SELECT * FROM Empresa WHERE nomeEmpresa LIKE 'f%';
+
+SELECT * FROM Empresa WHERE nomeEmpresa LIKE '%r_';
+
+INSERT INTO Empresa VALUES (null,'C6','Paulo');
+
+DELETE FROM Empresa where idEmpresa =3;
+
+DROP TABLE Empresa;
+
+INSERT INTO Empresa VALUES (null,'Bandtec','Vera');
+
+ALTER TABLE Empresa MODIFY nomeEmpresa varchar(40);
+
+ALTER TABLE NomeDaTabela MODIFY NomeDoCampo TipoDoCampo;
+
+Exemplo: ALTER TABLE empresa MODIFY NomeEmpresa VARCHAR(50);
+
+COMANDOS PARA CRIAR USUÁRIO E REALIZAR LOGIN MySQL Server CLI:
+
+-- Entrar no prompt de comando/cmd
+-- win + r, digitar cmd, pressionar ok
+
+-- Entrar no diretório bin do MySQL Server: arquivo mysql.exe
+-- cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+-- Entrar no MySQL Server com o usuário root
+-- mysql -u root -p
+
+-- Digitar a senha do usuário root
+
+-- Criar usuário MySQL Server via linha de comando
+CREATE USER 'consultor'@'localhost' IDENTIFIED BY 'urubu100';
+
+-- Dar todas as permissões ao usuário criado
+GRANT ALL ON *.* TO 'consultor'@'localhost';
+
+-- Dar permissão de apenas consulta
+GRANT SELECT, UPDATE ON *.* TO 'consultor'@'localhost';
+
+-- Confirmar as permissões/privilégios
+flush privileges;
+
+
+
+
+SCRIPT TABELA AULA:
+
+USE faculdade;
+
+CREATE TABLE aula (
+	idAula int primary key auto_increment,
+    nomeAula varchar(75),
+    tipo char(1),
+    check (tipo = 'o' or tipo = 'h' or tipo = 'p'),
+    dtAula date,
+    mensagem varchar(100)
+);
+
+INSERT INTO aula values 
+	(null, 'Apresentação da disciplina e primeiros conceitos',
+		'o', '2021-02-04', 'Conhecendo Banco de Dados'),
+    (null, 'Continuação de conceitos e primeiros comandos SQL',
+		'o', '2021-02-11', 'O primeiro comando a gente nunca esquece');
+    
+SELECT * FROM aula;
+
+INSERT INTO aula (nomeAula, tipo, dtAula, mensagem) values 
+	('Permissão de usuário e comandos gerais', 'p', 
+    '2021-02-18', 'Sejam bem vindos!');
+
+
+
+
+SCRIPT TABELA ALUNO ATUALIZADO:
+
+
+-- Criar o banco de dados
+CREATE DATABASE faculdade;
+-- Selecionar o banco de dados
+USE faculdade;
+
+-- Criar tabela ALUNO - DDL
+-- varchar e char
+-- 01211XXX
+
+CREATE TABLE aluno (
+	ra char(8) primary key,
+    nome varchar(100),
+    email varchar(100),
+    telefone varchar(25)
+);
+
+-- Exibir os dados da tabela aluno
+-- * = todos os campos/colunas
+SELECT * FROM aluno;
+SELECT ra, nome, email, telefone from aluno;
+SELECT ra, email, nome, telefone from aluno;
+
+-- Inserir dados na tabela aluno
+INSERT INTO aluno VALUES ('01211999', 'Vivian Silva',
+	'vivian.silva@bandtec.com.br', '11-987654321');
+    
+-- Para inserir mais de um registro
+INSERT INTO aluno VALUES 
+	('01211XXX', 'Vivian Aluna',
+    'vivian.aluna@bandtec.com.br', '11-987655555'),
+    ('01211YYY', 'Vivian Monitora',
+    'vivian.monitor@bandtec.com.br', '11-987651111');
+
+-- Inserir dados de apenas alguns campos
+INSERT INTO aluno (ra, nome, telefone) VALUES 
+('01211025', 'Daniel Pederzini', '11-987652345');    
+
+-- Exibir dados dos alunos
+SELECT * FROM aluno;
+
+-- Exibir dados do aluno com um respectivo nome
+SELECT * FROM aluno where nome = 'Daniel Pederzini';
+
+-- não sei o sobrenome do Daniel, o que fazer?
+SELECT * FROM aluno where nome like 'Daniel%';
+SELECT * FROM aluno where nome like '%Pederzini';
+SELECT * FROM aluno where nome like '%i';
+
+-- todos os alunos que a segunda letra do nome é 'a'
+SELECT * FROM aluno where nome like '_a%';
+SELECT * FROM aluno where nome like '%e_ %';
+
+-- Exibir os dados cujo o nome é diferente de um respectivo nome
+SELECT * FROM aluno where nome <> 'Vivian Silva';
+SELECT * FROM aluno where nome != 'Vivian Aluna';
+
+SELECT * FROM aluno where nome like '%n %';
+
+-- Exibir os campos ra, nome e email da tabela aluno
+SELECT ra, nome, email from aluno;
+
+-- Atualizar o e-mail de um respectivo aluno
+UPDATE aluno SET email = 'daniel@uol.com.br' 
+	WHERE ra = '01211025';
+
+-- Atualizar o nome de um respectivo aluno
+UPDATE aluno SET nome = 'Vivian Monitora' 
+	WHERE ra = '01211XXX';
+
+-- Ordenar em ordem descrecente pelo nome dos alunos
+select * from aluno order by nome desc;
+
+-- Deletar a tabela aluno
+-- DROP TABLE aluno;  
+
+-- Bons estudos!
+
+
+SCRIPT BANCO DE DADOS FACULDADE - TABELA ALUNO:
+
+-- Criar o banco de dados
+CREATE DATABASE faculdade;
+-- Selecionar o banco de dados
+USE faculdade;
+
+-- Criar tabela ALUNO - DDL
+-- varchar e char
+-- 01211XXX
+
+CREATE TABLE aluno (
+	ra char(8) primary key,
+    nome varchar(100),
+    email varchar(100),
+    telefone varchar(25)
+);
+
+-- Exibir os dados da tabela aluno
+-- * = todos os campos/colunas
+SELECT * FROM aluno;
+
+-- Inserir dados na tabela aluno
+INSERT INTO aluno VALUES ('01211999', 'Vivian Silva',
+	'vivian.silva@bandtec.com.br', '11-987654321');
+    
+-- Para inserir mais de um registro
+INSERT INTO aluno VALUES 
+	('01211XXX', 'Vivian Aluna','vivian.aluna@bandtec.com.br', '11-987655555'),
+    ('01211YYY', 'Vivian Monitora','vivian.monitor@bandtec.com.br', '11-987651111');
+    
+    
+    
+    CREATE DATABASE TECCHICKEN;
+USE TECCHICKEN;
+
+CREATE TABLE Usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome CHAR (50),
+CPF VARCHAR (11),
+nomeGranja VARCHAR(50),
+CNPJ CHAR (14)
+);
+
+CREATE DATABASE TECCHICKEN;
+USE TECCHICKEN;
+
+CREATE TABLE Usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome CHAR (50),
+CPF VARCHAR (11),
+nomeGranja VARCHAR(50),
+CNPJ CHAR (14)
+);
+
+
+    
+    
