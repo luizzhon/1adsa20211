@@ -237,3 +237,107 @@ USUÁRIOS NO MySQL:
 ALUNO: SELECT
 PROFESSOR: SELECT, INSERT, DELETE, UPDATE
     
+    
+create database sprint1;
+use faculdade;
+
+CREATE TABLE Atleta (
+	IDatleta int primary key auto_increment,
+    nome varchar(40),
+    modalidade varchar(40),
+    qtdMedalha int 
+);
+
+INSERT INTO Atleta values 
+(null, 'Usain Bolt', 'corrida', 8),
+(null, 'Oscar Schmidt', 'basquete', 6),
+(null, 'Lucas Bittencourt', 'Ginastica', 4),
+(null, 'Maybyner Hilário', 'basquete', 5),
+(null, 'Arthur Zanetti', 'Ginastica', 6),
+(null, 'Frank Caldeira', 'corrida', 2);
+
+SELECT * FROM Atleta; 
+
+
+SELECT nome, qtdMedalha FROM Atleta; 
+
+
+SELECT * FROM Atleta where modalidade= 'corrida';
+
+
+SELECT * FROM Atleta order by modalidade;
+
+
+SELECT * FROM Atleta order by qtdMedalha desc;
+
+
+SELECT * FROM Atleta where nome like '%s%';
+
+
+SELECT * FROM Atleta where nome like 'u%';
+
+
+SELECT * FROM Atleta where nome like '%o';
+
+
+SELECT * FROM Atleta where nome like '%r_';
+
+
+DROP TABLE Atleta;
+
+
+create database sprint2;
+use faculdade;
+
+CREATE TABLE Musica (
+	IDmusica int primary key auto_increment,
+    titulo varchar(40),
+    artista varchar(40),
+    genero varchar (40)
+);
+
+INSERT INTO Musica values
+(null, 'Vt ta na bota', 'Mc Paulin da Capital','Funk'),
+(null, 'So gratidao', 'Mc Paulin da Capital', 'Funk'),
+(null, 'I am you', 'Ynw Melly', 'Trap'),
+(null, 'Murder on my mind', 'Ynw Melly','Trap'),
+(null, 'Know My Name', 'Fetty Wap', 'Rap'),
+(null, 'Couple Bands', 'Fetty Wap', 'Rap'),
+(null, 'Lancinho', 'Turma do Pagode', 'Pagode'),
+(null, 'Cobertor de Orelha', 'Turma do Pagode', 'Pagode');
+
+
+SELECT * FROM Musica;
+
+
+SELECT titulo, artista FROM Musica;
+
+
+SELECT * FROM Musica where genero= 'Funk';
+
+
+SELECT * FROM Musica where artista='Ynw Melly';
+
+
+SELECT * FROM Musica order by titulo;
+
+
+SELECT * FROM Musica order by artista desc;
+
+
+SELECT * FROM Musica where titulo like '%i%';
+
+
+SELECT * FROM Musica where artista like 'y%';
+
+
+SELECT * FROM Musica where genero like '_r%';
+
+
+SELECT * FROM Musica where titulo like '%h_';
+
+
+DROP TABLE Musica;
+    
+    
+    
