@@ -1,0 +1,1157 @@
+AULA 08.html:
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 08 - Imagens</title>
+</head>
+<body>
+
+    <h2>Imagens numa pagina</h2>
+
+    Imagem da internet <br>
+    <img style= "height:100px;" src = "http://pudim.com.br/pudim.jpg" alt="Foto de um pudim">
+    
+
+    <br><br>
+
+    <img style= "height: 100px;"src= "https://cdn.motor1.com/images/mgl/bpvb3/s4/lamborghini-sian-roadster.jpg" alt="Foto de um carro"> 
+    
+</body>
+</html>
+
+
+
+
+
+AULA 10-Button-Function.html:
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 10 - Button function</title>
+</head>
+<body>
+    <h2>Qual é a o seu time???</h2>
+    <button onclick="Corinthians()" style= "background-color: black; color: white;"> Fale do corinthians</button>
+    <button onclick="Palmeiras()" style="background-color: green;color: white;"> Fale do palmeiras</button>
+    <button onclick="SãoPaulo()" style="background-color: red;color: white;"> Fale do São Paulo</button>
+    
+    
+</body>
+</html>
+<script>
+
+function Corinthians() {
+    alert ("Vai corinthains!");
+}
+function Palmeiras() {
+    alert ("Esse não tem mundial!!");
+}
+function SãoPaulo() {
+    alert ("Sete anos sem titulo!!");
+
+}
+</script>
+
+
+
+
+
+AULA 10-Meu primeiro botão.html
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 10 - button function</title>
+</head>
+<body>
+    <h2>Aula 10 - Button function</h2>
+    <button onclick="prim_func()" style="color:red;background-color: black;">Meu primeiro botão</button>
+</body>
+</html>
+<script>
+    function prim_func() {
+    alert ('Está é uma mensagem solta do script');
+    alert ('Segunda mensagem!!!');
+}
+</script>
+
+
+
+
+AULA 12.html:
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 12</title>
+</head>
+<body>
+
+    Era uma vez... <button onclick="continuar()">continuar</button>
+    <span id="span_continuacao"></span>
+
+    <br>
+    <button onclick="feliz()">continuar</button>
+</body>
+</html>
+<script>
+    function continuar()  {
+          span_continuacao.innerHTML = 'um lugar no meio do nada';
+    }
+    function feliz() {
+          span_continuacao.innerHTML = 'e viveram <b>felizes</b> para sempre';
+    }
+</script>
+
+
+
+
+
+
+AULA 13.html:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 13</title>
+</head>
+<body>
+    
+    <button onclick="Frutas()">Frutas</button>
+    <button onclick="Legumes()">Legumes</button>
+    <button onclick="Carnes()">Carnes</button>
+    <button onclick="Guloseimas()">Guloseimas</button>
+
+<div id="div_lista">
+    <h3>Lista de compras</h3>
+</div>
+
+</body>
+</html>
+<script>
+     function Frutas() {
+         div_lista.innerHTML += "* Frutas <br>" ;
+     }
+     function Legumes() {
+         div_lista.innerHTML += "* Legumes <br>" ;
+     }
+     function Carnes() {
+         div_lista.innerHTML += "* Carnes <br>" ;
+     }
+     function Guloseimas() {
+         div_lista.innerHTML += "* Guloseimas <br>" ;
+     }
+     function apagar() {
+         div_lista.innerHTML += '';
+     }
+</script>
+
+
+
+
+
+AULA 14a-innerHTML:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 14 Apagando Conteúdo</title>
+</head>
+<body>
+    
+    <button onclick="frutas()">Frutas</button>
+    <button onclick="legumes()">Legumes</button>
+    <button onclick="carnes()">Carnes</button>
+    <button onclick="guloseimas()">Goloseimas</button>
+    <br><br>
+    <button onclick="apagar()">Limpar a Lista</button>
+    <br>
+    <div id="div_lista">
+        <h3>Lista de compras</h3>
+    </div>
+
+</body>
+</html>
+<script>
+    function frutas() {
+        div_lista.innerHTML += "* Frutas <br>";
+    }    
+    function legumes() {
+        div_lista.innerHTML += '* Legumes <br>';
+    }    
+    function carnes() {
+        div_lista.innerHTML += '* Carnes <br>';
+    }    
+    function guloseimas() {
+        div_lista.innerHTML += '* Goloseimas <br>';
+    }   
+    function apagar() {
+    //se usar um par de aspas simples ou dupla, sem nada detro, o corpo da tab some da página
+
+        div_lista.innerHTML = '';
+    } 
+</script>
+
+
+
+
+
+
+AULA 14b-apagando-conteudo.html:
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aula 14 - Apagango Conteúdo</title>
+</head>
+
+<body>
+
+    <h2>Apagando o Conteúdo</h2>
+
+    Dorme agora
+    É só o vento lá fora <br>
+    Quero <b id="b_colo" >colo, vou</b> fugir de casa <br>
+    Posso <b id="b_dormir" >dormir aqui com vocês</b> ? <br>
+    <b id="b_medo" >Estou com medo tive um pesadelo <br> </b>
+    Só vou voltar depois das três <br>
+    Meu filho <i id="i_santo" >vai ter nome de santo <br>
+        Quero o nome mais</i> bonito
+    <br>
+    <p id="p_pessoas" >É preciso amar as pessoas <br>
+        Como se não houvesse amanhã <br>
+        Por que se você parar pra pensar <br>
+        Na verdade não há
+    </p>
+    <br>
+    <button onclick="palavras()">Apagar Palavras</button>
+    <button onclick="frase()">Apagar a última Frase</button>
+    
+
+</body>
+
+</html>
+<script>
+    function palavras() {
+    // se usar um par de aspas simples ou dupla, sem nada detro, o corpo da tab some da página
+    // valido para as tags que possuem corpo
+
+        b_colo.innerHTML = "";
+        b_dormir.innerHTML = '';
+        b_medo.innerHTML = '';
+        i_santo.innerHTML = '';
+    }
+
+    function frase() {
+       p_pessoas.innerHTML = '';
+    }
+
+    
+</script>
+
+
+
+
+
+
+AULA 15_input.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula15 Input</title>
+</head>
+
+<body>
+    <!--
+        A tag input cria um campo para entrada de dados
+        Vamos SEMPRE usar o type="text" (ou omitir este atributo)
+        Vamos SEMPRE usar o atributo id
+        
+        O atributo placeholder cria um texto temporário
+        dentro do próprio campo
+    
+        Regras para valor de id: 
+        1. todas as letras devem ser minúsculas
+        2. não começar com número 
+        3. pode ter número no meio ou fim
+        4. a cada "palavra", usar "_" (underline)
+        ex: telefone_comercial, quantidade_filhos
+        5. NÃO pode ter espaço em branco
+        6. NÃO usar nomes de tags (body, h3, img, div etc)
+        7. NÃO usar caracteres especiais (acentos, cedilha, etc)
+    -->
+
+    Entre com o seu <b> primeiro nome: </b>
+    <input id="primeiro" type="text" placeholder="primeiro nome">
+    <br>
+    Entre com o seu <b> último nome: </b>
+    <input id="ultimo" type="text" placeholder="Último Nome">
+    <br>
+    <button onclick="incluir()" style="background: red; color: green;">Incluir</button>
+    <br>
+    <div id="div_mens">
+        <h3>Mini Cadastro de Nome</h3>
+        Seu nome é: <br>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function incluir() {
+        // usando o id de uma tab de input e depois o .value recuperamos o valor que foi digitado nela
+        // alert ("seu nome é: " + primeiro.value + '     ' + ultimo.value);
+
+        // Aqui usamos a Concatenação
+        // Inicializamos e Finalizamos o texto com aspas simples ou duplas
+        // a concatenação é feita com o simbolo "+" (sinal de mais)
+        div_mens.innerHTML += primeiro.value + '     ' + ultimo.value + "<br>";
+        primeiro.value = '';
+        ultimo.value = '';
+    }
+
+</script>
+
+
+
+
+
+
+AULA 15-input2.html:
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Aula15 input</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    Entre com o seu <b>primeiro nome:</b>
+
+    <input id="primeiro" type="text" placeholder="primeiro nome">
+    <br>
+
+    Entre com seu <b>ultimo nome</b>
+    <input id="ultimo" type="text" placeholder="ultimo nome">
+    <br>
+
+    <button onclick="incluir()"> Incluir</button>
+    <br>
+
+    <div id="div_mens">
+        <h3>Mini cadastro de nome</h3>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function incluir() {
+        alert("seu nome é:" + primeiro.value + ultimo.value)
+    }
+</script>
+
+
+
+
+
+AULA16-interpolação.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula16 Interpolação</title>
+</head>
+
+<body>
+    <h2>Input com interpolação</h2>
+    Entre com o seu <b> primeiro nome: </b>
+    <input id="primeiro" type="text" placeholder="primeiro nome">
+    <br>
+    Entre com o seu <b> último nome: </b>
+    <input id="ultimo" type="text" placeholder="Último Nome"  >
+    <br>
+    <button onclick="incluir()" style="background: red; color: green;">Incluir</button>
+    <br>
+    <div id="div_mens">
+        <h3>Mini Cadastro de Nome</h3>
+        <u>Seu nome é:</u>  <br> <br>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function incluir() {
+        // aqui usamos a INTERPOLAÇÃO!
+        // iniciamos e finalizamos o texto com CRASE! Usamos ${} para colocar a parte dinamica, 
+        // ou seja EXPRESSÕES (ex: valor de um campo)
+        div_mens.innerHTML += `O primeiro é: ${primeiro.value} o segundo é: <b> ${ultimo.value} </b>`;
+        primeiro.value = '';
+        ultimo.value = '';
+    }
+
+</script>
+
+
+
+
+
+AULA17_calculos.innerHTML.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula17 Cálculos na Página</title>
+</head>
+
+<body>
+    <h2>Minha Calculadora Preferida!!!</h2>
+    Entre com o primeiro número:
+    <input id="pri_num" type="text" placeholder="Primeiro Número"> <br><br>
+    Entre com o segundo número:
+    <input id="seg_num" type="text" placeholder="Segundo Número">
+    <br><br>
+
+    <button onclick="multiplicar()">Multiplicação</button>
+    <button onclick="dividir()">Divisão</button>
+    <button onclick="exponenciar()">Exponenciação</button>
+    <button onclick="raiz()">Radiciação</button>
+    <button onclick="subtrair()">Subtração</button>
+    <button onclick="somar()">Soma</button>
+    <div id="div_msg"></div>
+
+</body>
+
+</html>
+<script>
+    function multiplicar() {
+        div_msg.innerHTML += `<br>O resultado da multiplicação é: <b> 
+            ${pri_num.value * seg_num.value} </b>`;
+    }
+    function dividir() {
+        div_msg.innerHTML += `<br>O resultado da divisão é: <b> 
+            ${pri_num.value / seg_num.value} </b>`;
+    }
+    function exponenciar() {
+        div_msg.innerHTML += `<br>O resultado da exponenciação é: <b> 
+            ${pri_num.value ** seg_num.value} </b>`;
+    }
+    function raiz() {
+        div_msg.innerHTML += `<br>O resultado da radiciação é: <b> 
+            ${pri_num.value ** (1/seg_num.value)} </b>`;
+    }
+    function subtrair() {
+        div_msg.innerHTML += `<br>O resultado da subtração é: <b> 
+            ${pri_num.value - seg_num.value} </b>`;
+    }
+    function somar() {
+        div_msg.innerHTML += `<br>O resultado da soma é: <b> 
+            ${Number(pri_num.value) + Number(seg_num.value)} </b>`;
+    }
+
+</script>
+
+
+
+
+AULA18-Cálculos.html:
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 18 - Calculos</title>
+</head>
+<body>
+    <h2>Minha calculadora preferida</h2>
+    Entre com o primeiro número:
+    <input placeholder="Primeiro Número" id="prim_num" type="text">
+    <br><br>
+    Entre com o segundo número:
+    <input placeholder="Segundo Número" id="segun_num" type="text">
+    <br><br>
+    <button onclick="multiplicar()">Multiplicação</button>
+    <button onclick="dividir()">Divisão</button>
+    <button onclick="exponenciar()">Exponenciação</button>
+    <button onclick="raiz()">Radiciação</button>
+    <button onclick="subtrair()">Subtração</button>
+    <button onclick="somar()">Soma</button>
+    <div id="div_msg"></div>
+</body>
+</html>
+
+<script>
+    function multiplicar() {
+        var n1 = prim_num.value
+        var n2 = segun_num.value
+        div_msg.innerHTML += `O resultado da multiplicação é: <b>${n1 * n2}</b> <br>`;
+    }
+    function dividir() {
+        var divis = prim_num.value / segun_num.value
+        div_msg.innerHTML += `O resultado da divisão é: <b>${divis}</b> <br>`;
+    }
+    function exponenciar() {
+        div_msg.innerHTML += `O resultado da exponenciação é: <b>${prim_num.value ** segun_num.value}</b> <br>`;
+    }
+    function raiz() {
+        div_msg.innerHTML += `O resultado da raiz é: <b>${prim_num.value ** (1/segun_num.value)}</b> <br>`;
+    }
+    function subtrair() {
+        div_msg.innerHTML += `O resultado da subtração é: <b>${prim_num.value - segun_num.value}</b> <br>`;
+    }
+    function somar() {
+        var n1 = Number(prim_num.value);
+        var n2 = Number(segun_num.value);
+        div_msg.innerHTML += `O resultado da soma é: <b>${n1 + n2}</b> <br>`;
+    }
+</script>
+
+
+
+
+AULA18-variavel.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula18 Cálculos com Variável</title>
+</head>
+
+<body>
+    <h2>Minha Calculadora Preferida!!!</h2>
+    Entre com o primeiro número:
+    <input id="pri_num" type="text" placeholder="Primeiro Número"> <br><br>
+    Entre com o segundo número:
+    <input id="seg_num" type="text" placeholder="Segundo Número">
+    <br><br>
+
+    <button onclick="multiplicar()">Multiplicação</button>
+    <button onclick="dividir()">Divisão</button>
+    <button onclick="exponenciar()">Exponenciação</button>
+    <button onclick="raiz()">Radiciação</button>
+    <button onclick="subtrair()">Subtração</button>
+    <button onclick="somar()">Soma</button>
+    <div id="div_msg"></div>
+
+</body>
+
+</html>
+<script>
+    function multiplicar() {
+        // aqui eu criei a variável n1 que recebeu o conteudo do campo de tela pri_num 
+        // depois criei a variável n2 que recebeu o conteudo do campo de tela seg_num 
+        // essas variáveis podem ser usadas várias vezes dentro da função que elas foram criadas
+        var n1 = pri_num.value;
+        var n2 = seg_num.value;
+        div_msg.innerHTML += `<br>O resultado da multiplicação é: <b> 
+            ${n1 * n2} </b>`;
+    }
+    function dividir() {
+        // neste caso eu criei a variável divis que recebeu o resultado de uma operação
+        var divis = pri_num.value / seg_num.value;
+        div_msg.innerHTML += `<br>O resultado da divisão é: <b> 
+            ${divis} </b>`;
+    }
+    function exponenciar() {
+        div_msg.innerHTML += `<br>O resultado da exponenciação é: <b> 
+            ${pri_num.value ** seg_num.value} </b>`;
+    }
+    function raiz() {
+        div_msg.innerHTML += `<br>O resultado da radiciação é: <b> 
+            ${pri_num.value ** (1/seg_num.value)} </b>`;
+    }
+    function subtrair() {
+        div_msg.innerHTML += `<br>O resultado da subtração é: <b> 
+            ${pri_num.value - seg_num.value} </b>`;
+    }
+    function somar() {S
+        var n1 = Number(pri_num.value);
+        var n2 = Number(seg_num.value);
+        div_msg.innerHTML += `<br>O resultado da soma é: <b> 
+            ${n1 + n2} </b>`;
+    }
+
+</script>
+
+
+
+
+
+AULA19-Atalahos Matematicos.html:
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 19 - Atalhos Matematicos</title>
+</head>
+<body>
+    <h2>Vamos fazer contas mais facilmente??</h2>
+    <input placeholder="Número Qualquer" id="numero" type="text">
+    <br><br>
+    <button onclick="aumentar1()">Aumentar em 1</button>
+    <button onclick="reduzir1()">Reduzir em 1</button>
+    <button onclick="aumentar1simples()">Aumentar em 1 (método simples)</button>
+    <button onclick="reduzir1simples()">Reduzir em 1 (método simples)</button>
+</body>
+</html>
+
+<script>
+    function aumentar1() {
+        var result = Number(numero.value);
+        result +=1;
+        alert (result);
+    }
+    function reduzir1() {
+        var result = Number(numero.value);
+        result -=1;
+        alert (result);
+    }
+    function aumentar1simples() {
+        var result = Number(numero.value);
+        result ++;
+        alert (result);
+    }
+    function reduzir1simples() {
+        var result = Number(numero.value);
+        result --;
+        alert (result);
+    }
+</script>
+
+
+
+
+aula19-atalhos-matematicos.html:
+
+
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 19 Atalhos Matemáticos</title>
+</head>
+
+<body>
+    <h3>Vamos fazer contas mais facilmente??</h3>
+    <input id="numero" placeholder="Número qualquer" autofocus>
+    <br><br>
+    <button onclick="aumentar1()">Aumentar em 1</button>
+    <button onclick="reduzir1()">Reduzir em 1</button>
+    <button onclick="aumentar1simples()">Aumentar em 1 (método simples)</button>
+    <button onclick="reduzir1simples()">Reduzir em 1 (método simples)</button>
+</body>
+
+</html>
+<script>
+    function aumentar1() {
+        // neste caso estamos somando 1 no conteúdo do campo result, mas poderia ser qualquer outro valor
+        var result = Number(numero.value);
+        result +=1;
+        alert (result);
+    }
+    function reduzir1() {
+        // neste caso estamos ssubtraindo 1 no conteúdo do campo result, mas poderia ser qualquer outro valor
+        var result = Number(numero.value);
+        result -=1;
+        alert (result);      
+    }
+    function aumentar1simples() {
+        var result = Number(numero.value);
+        result++;
+        alert (result);
+    }
+    function reduzir1simples() {
+        var result = Number(numero.value);
+        result--;
+        alert (result);
+    }
+
+</script>
+
+
+
+
+
+BandHolanda.html:
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandeira da Holanda</title>
+</head>
+
+<body>
+    <div style="background-color: rgba(255, 0, 0, 0.993); ; height: 80px; width: 10%; float: left;"></div>
+    <div style="background-color: rgb(255, 255, 255); ; height: 80px; width: 10%; float: left;"></div>
+    <div style="background-color: rgb(45, 9, 247); ; height: 80px; width: 10%; float: left;"></div>
+</body>
+
+</html>
+
+
+
+
+
+ExCompl1.html:
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio Complemento 1</title>
+</head>
+<body>
+    
+  <H3>Orçamento do Nicanor</H3>
+  Informe a quantidade de metros:
+  <input id="metros" placeholder="quantidade de metros">
+  <button onclick="calcular()">Fazer Orçamento</button>
+  <br><br>
+  <div id="div_msg"></div>
+
+</body>
+</html>
+<script>
+    function calcular() {
+        var nicanor = (Number(metros.value) * 10) + 50;
+        var rotirute = (Number(metros.value) * 9.8) + 600;
+        var dif = nicanor - rotirute;
+        div_msg.innerHTML  = ` O serviço pelo Nicanor sai por R$ ${nicanor}`;
+        div_msg.innerHTML += ` <br>O serviço pelo Rotirute sai por R$ ${rotirute}`;
+        div_msg.innerHTML += ` <br>A diferença dos valores é de R$ ${dif}`;
+    }
+        
+
+        
+</script>
+
+
+
+
+
+Exercicio da aula 13.html:
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio aula 13</title>
+</head>
+<body>
+    
+     <h1>Meus heróis favoritos são:</h1>
+     <button onclick="hero()">Ver heróis</button>
+     <span id="span_hero"></span>
+     <h1>Meus vilões favoritos são:</h1>
+     <button onclick="vilan()">Ver vilões</button>
+     <span style="color: red;" id="span_vilan"></span>
+
+</body>
+</html>
+<script>
+     function hero() {
+         span_hero.innerHTML = '<b>Batman</b> e <i>SuperShok</i>'
+     }
+     function vilan() {
+         span_vilan.innerHTML ='<b>Coringa</b> e <i>Kingkong</i>'
+     }
+
+</script>
+
+
+
+
+Exercicio1-Fundos Coloridos.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 10 - Button function</title>
+</head>
+<body>
+    <center>
+    <h2>Fundos coloridos</h2>
+    <button onclick="Verde()" style="background-color: green;">Verde</button>
+    <button onclick="Amarelo()" style="background-color: yellow;">Amarelo</button>
+    <button onclick="Azul()" style="background-color: blue;">Azul</button>
+    <center>
+    
+</body>
+</html>
+<script>
+
+function Verde() {
+    alert ("Natureza");
+}
+function Amarelo() {
+    alert ("Sol");
+}
+function Azul() {
+    alert ("Mar");
+
+}
+</script>
+
+
+
+
+
+Exercicio1.html:
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impostor Among us</title>
+</head>
+<body>
+Há <span style="color:red;">um impostor </span> entre nós 
+<br> <img src="Exercicio1.png" alt="">
+</body>
+</html>
+
+
+
+
+
+Exercicio2 da aula 13.html:
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio2 da aula 13</title>
+</head>
+<body>
+    
+<button onclick="GolRemo()">Gol do Remo</button> 
+<button onclick="GolPaysandu()">Gol do Paysandu</button>
+<button onclick="EscanteioRemo()">Escanteio para o Remo</button>
+<button onclick="EscanteioPaysandu()">Escanteio para o Paysandu</button>
+<h3>Placar do jogo</h3>
+<span id="span_texto"></span>
+</body>
+</html>
+<script>
+    function GolRemo() {
+        span_texto.innerHTML +=('<span style=" color: navy;"> Goool do <b>leão</b>!</span> <br>') ;
+    }
+    function GolPaysandu() {
+        span_texto.innerHTML +=('<span style=" color: cyan;"> Goool da <u>Mucura</u>!</span> <br>') ;
+    }
+    function EscanteioRemo() {
+        span_texto.innerHTML +=('Escanteio para o leão <br>') ;
+    }
+    function EscanteioPaysandu() {
+        span_texto.innerHTML +=('Escanteio para a Mucura <br>') ;
+    }
+</script>
+
+
+
+
+
+Exercicio2-Goku e Vegeta.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goku e Vegeta</title>
+</head>
+<body>
+    
+<img onclick="Goku()" style="width: 20%;" src="https://www.boletimnerd.com.br/wp-content/uploads/2017/10/Dragon-Ball-Super-Nova-Transformacao-Goku-1.png" alt="Imagem do Goku">
+<img onclick="Vegeta()" style="width: 20%; height: 247px;" src="https://i.pinimg.com/564x/0e/a5/65/0ea56585c5f0e348c8062334e016b3c6.jpg" alt="Imagem do Vegeta">
+
+
+
+</body>
+</html>
+<script>
+function Goku() {
+     alert('Oi, eu sou o Goku');
+}
+function Vegeta() {
+     alert('Se você não sabe quem sou não passa de um verme maldito!');
+}
+</script>
+
+
+
+
+
+
+Exercicio2.html:
+
+
+
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z</title>
+</head>
+<body>
+    <h2> Dragon Ball Z</h2> 
+    <br>
+<div style="font-size: 25px;">No anime <b> Dragon Ball Z </b>, os personagens da raça Sayajin podem se transformar ficando mais fortes, como ilustrado a seguir:
+</div>
+
+<div style="background-color: gray;height: 150px;"><img src="Sayajin1.png" alt="" style="height: 150px;"></div>
+<br>
+<div style="background-color:yellow;height: 150px;"><img src="Sayajin2.png" alt="" style="height: 150px;"></div>
+<br>
+<div style="background-color: orange;height: 150px;"><img src="Sayajin3.png" alt="" style="height: 150px;"></div>
+<br>
+<div style="background-color:lightblue;height: 150px;"><img src="Sayajin4.png" alt="" style="height: 150px;"></div>
+
+</body>
+</html>
+
+
+
+
+Exercicio04.html:
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 04</title>
+</head>
+<body>
+    <h3>Cálculo de média</h3>
+    Informe a primeira nota: <input id="pri_nota" placeholder="Primeira nota"></br>
+    Informe a segunda nota: <input id="seg_nota" placeholder="Segunda nota"><br>
+    <button onclick="calcular()"> Cálculo da Média </button>        
+</body>
+</html>
+<script>
+    function calcular() {
+        var media = (Number(pri_nota.value) + Number(seg_nota.value))/2;
+        alert ("a média é: " + media);
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+index.html:
+
+
+
+<!doctype html>
+<html>
+
+<head>
+	<title>Line Chart</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<h2>Média: <label id='average'>0.00</label></h2>
+		<h2>Média Hora: <label id='averageHour'>0.00</label></h2>
+	</section>
+	<section style="width:100%">
+		<canvas id="chart"></canvas>
+	<section>
+	<script>
+
+		var context = document.getElementById("chart").getContext("2d");
+		context.canvas.width = 1000;
+		context.canvas.height = 300;
+        
+        var configuration = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Temperature x Time",
+					type: 'line',
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						//type: 'value',
+						distribution: 'series',
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Temperature'
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+        };
+        
+		var chart = new Chart(context, configuration);
+
+        //Função para obter os dados de temperatura do server
+        //Seria mais interessante fazer isso com WebSocket, porém para fins academicos, os dados serão atualizados via HTTP
+        
+        //Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
+        //hora de montar/atualizar o gráfico
+        this.lastIndexTemp = 0;
+        this.time = 0;
+
+        function get_data(){
+
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3000/api', false);
+            http.send(null);        
+			
+            var obj = JSON.parse(http.responseText);
+			console.log(obj)
+            if (obj.data.length == 0){
+                return;
+            }
+
+            var _lastIndexTemp = this.lastIndexTemp;
+            this.lastIndexTemp = obj.data.length;
+            listTemp = obj.data.slice(_lastIndexTemp);
+
+            listTemp.forEach(data => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10){
+                    chart.data.labels.shift();
+                    chart.data.datasets[0].data.shift();
+                }
+
+                chart.data.labels.push(this.time++);
+                chart.data.datasets[0].data.push(parseFloat(data));
+                chart.update();
+			});
+			
+			document.getElementById('average').textContent = obj.average;
+			document.getElementById('averageHour').textContent = obj.averageHour;
+		} 
+		
+		get_data();
+
+        setInterval(() => {
+            get_data();
+        }, 1000);
+
+	</script>
+</body>
+
+</html>
