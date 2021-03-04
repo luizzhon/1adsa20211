@@ -341,3 +341,43 @@ DROP TABLE Musica;
     
     
     
+    
+ CREATE DATABASE TECCHICKEN;
+USE TECCHICKEN;
+
+CREATE TABLE Usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome CHAR (50),
+CPF VARCHAR (11),
+nomeGranja VARCHAR (50),
+CNPJ CHAR (14)
+);
+
+INSERT INTO Usuario VALUES 
+(null, 'henrique', '85170656033', 'granja do henrique', '79838569000180'),
+(null, 'luciano', '94997759007', 'granja do luciano', '39175355000157'),
+(null, 'bia', '83261392037', 'granja da bia', '16398022000191'),
+(null, 'tiago', '56849110055', 'granja do tiago', '22575602000100');
+
+SELECT * FROM Usuario;
+
+SELECT nome,  CNPJ FROM Usuario;
+
+SELECT * FROM Usuario WHERE nomeGranja= 'granja da bia';
+
+SELECT * FROM Usuario ORDER BY nomeGranja;
+
+SELECT * FROM Usuario ORDER BY CNPJ DESC;
+
+SELECT * FROM Usuario WHERE nome LIKE '%i%';
+
+SELECT * FROM Usuario WHERE nome LIKE 'b%';
+
+SELECT * FROM Usuario WHERE nome LIKE '%o';
+
+SELECT * FROM Usuario WHERE nome LIKE '%n_';
+
+DROP TABLE Usuario;
+   
+    
+    
