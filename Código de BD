@@ -381,3 +381,53 @@ DROP TABLE Usuario;
    
     
     
+    Tabela  da prova:
+    
+    
+    CREATE DATABASE ac01211089;
+USE ac01211089;
+
+CREATE TABLE Moto (
+iDmoto int primary key auto_increment,
+    nome varchar(50),
+    placa varchar(7),
+    cidade char (30)
+);
+
+INSERT INTO Moto values
+(null, 'xj6 2020', 'FXZ4853', 'sao paulo'),
+(null, 'honda cb 600f hornet','LRK0828','rio de janeiro'),
+(null, 'bmw S1000RR', 'MOR1703', 'paraiba'),
+(null, 'Honda CBR1000 RR', 'HCM4339', 'minas gerais' ),
+(null, 'Yamaha YZF-R1', 'NAD5031', 'acre' ),
+(null, 'bmw r 1200 gs', 'JOK9668','bahia' ),
+(null, 'kawasaki zx-10r','NDF4741','roraima');
+
+SELECT * FROM Moto;
+
+SELECT nome, cidade FROM Moto;
+
+SELECT * FROM Moto where cidade= 'sao paulo';
+
+SELECT * FROM Moto where placa= 'NDF4741';
+
+SELECT * FROM Moto order by cidade;
+
+SELECT * FROM Moto order by nome desc;
+
+
+SELECT * FROM Moto where nome like '%r_';
+
+SELECT * FROM Moto where cidade like 's%';
+
+SELECT * FROM Moto where placa like '_o%';
+
+SELECT * FROM Moto where nome like '%j%';
+
+UPDATE Moto set placa = 'LRK0828' where iDmoto = 'KEV6403';
+SELECT * FROM Moto;
+
+DELETE FROM Moto where idMoto =5;
+SELECT * FROM Moto;
+
+DROP TABLE Moto;
