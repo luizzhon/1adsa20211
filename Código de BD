@@ -431,3 +431,43 @@ DELETE FROM Moto where idMoto =5;
 SELECT * FROM Moto;
 
 DROP TABLE Moto;
+
+
+
+
+CREATE DATABASE Temperatura;
+USE Temperatura;
+
+CREATE TABLE Temperatura (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+temperatura CHAR (2),
+dia DATE,
+hora time
+);
+
+INSERT INTO Temperatura VALUES 
+(null, '41', '2020-10-21', '12:00:22'),
+(null, '21', '2021-01-03', '17:05:50'),
+(null, '23', '2012-04-14', '10:30:23'),
+(null, '32', '2001-06-11', '14:52:20');
+
+
+SELECT * FROM Temperatura;
+
+SELECT temperatura, hora FROM Temperatura;
+
+SELECT * FROM Temperatura WHERE dia= '2001-06-11';
+
+SELECT * FROM Temperatura ORDER BY dia;
+
+SELECT * FROM Temperatura ORDER BY hora DESC;
+
+SELECT * FROM Temperatura WHERE temperatura LIKE '%23%';
+
+SELECT * FROM Temperatura WHERE dia LIKE '2021-01-03%';
+
+SELECT * FROM Temperatura WHERE hora LIKE '%12:00:22';
+
+SELECT * FROM Temperatura WHERE temperatura LIKE '32%';
+
+DROP TABLE Temperatura;
