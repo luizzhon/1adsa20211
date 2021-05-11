@@ -471,3 +471,37 @@ SELECT * FROM Temperatura WHERE hora LIKE '%12:00:22';
 SELECT * FROM Temperatura WHERE temperatura LIKE '32%';
 
 DROP TABLE Temperatura;
+
+
+
+-- Criar database Jornal
+create database Jornal;
+-- Usar Jornal
+use jornal;
+-- Criar tabela Jornal
+create table Jornal (
+idJornal int primary key auto_increment,
+nomeJornal varchar (45)
+);
+-- Criar tabela Reporter
+create table Reporter (
+idReporter int primary key,
+nomeReporter varchar (45),
+dataNasc date,
+sexo char (1),
+check (sexo='m'or sexo='f'),
+fkJornal int,
+foreign key (fkJornal) references Jornal (idJornal)
+);
+-- Inserir dados na Tabela Jornal
+insert into Jornal values 
+(null,'Estadao');
+-- Inserir dados na Tabela Reporter
+insert into Reporter values
+(1,'Mateus','1996-06-12','m', 1),
+(2,'Larissa','2000-07-13','f', 2);
+-- Selecionar todos os dados das tabelas
+select * from Jornal;
+select * from Reporter;
+Update Jornal set nomeJornal='Datafolha' Where idJornal=1;
+Delete from Jornal Where idJornal=1;
