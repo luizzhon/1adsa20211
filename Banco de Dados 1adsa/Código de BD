@@ -340,9 +340,7 @@ SELECT * FROM Musica where titulo like '%h_';
 DROP TABLE Musica;
     
     
-    
-    
- CREATE DATABASE TECCHICKEN;
+CREATE DATABASE TECCHICKEN;
 USE TECCHICKEN;
 
 CREATE TABLE Usuario (
@@ -517,3 +515,279 @@ select * from Reporter;
 Update Jornal set nomeJornal='Datafolha' Where idJornal=1;
 
 Delete from Jornal Where idJornal=1;
+
+SCRIPT DO REFORÇO
+
+-- Criando banco de dados
+CREATE DATABASE Produtos;
+
+-- Usando banco de dados
+USE Produtos;
+
+-- Criando tabela Categoria
+CREATE TABLE Categoria (
+idCategoria INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45)
+);
+
+-- Criando tabela Produtos
+CREATE TABLE Produtos (
+idProduto INT PRIMARY KEY AUTO_INCREMENT,
+descricao VARCHAR (100),
+marca VARCHAR (50),
+fkCategoria INT,
+FOREIGN KEY (fkCategoria) REFERENCES Categoria (idCategoria)
+)AUTO_INCREMENT = 100; 
+
+-- Criando tabela Loja
+CREATE TABLE Loja (
+idLoja INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45),
+DataFunc DATE
+)AUTO_INCREMENT = 1000;
+
+-- Criando tabela associativa
+CREATE TABLE ProdutoLoja (
+fkProduto INT,
+FOREIGN KEY (fkProduto) REFERENCES Produtos (idProduto),
+fkLoja INT, 
+FOREIGN KEY (fkLoja) REFERENCES Loja (idLoja),
+PRIMARY KEY (fkProduto, fkLoja),
+preco DECIMAL (6,2)
+);
+
+ -- Inserindo dados na tabela categoria
+INSERT INTO Categoria	(nome)
+VALUES 					('Chocolate'),
+						('Refrigerante');
+
+-- Inserindo dados na tabela produtos
+INSERT INTO Produtos	(descricao, marca, fkCategoria)
+VALUES					('Sensação', 'Lacta', 1),
+						('Diamante negro', 'Nestle', 1),
+                        ('Talento', 'Garoto', 1),
+                        ('Coca-cola', 'Coca', 2),
+                        ('Fanta uva', 'Fanta', 2),
+                        ('Sprit limão', 'Sprit', 2);
+
+-- Inserindo dados na tabela loja 
+INSERT INTO Loja		(nome, dataFunc)
+VALUES					('Loja 1', '2000-01-01'),
+						('Loja 2', '2001-12-12');
+
+-- Inserindo dados na tabela ProdutoLoja
+INSERT INTO ProdutoLoja	(fkProduto, fkLoja, preco)
+VALUES					(100, 1000, 5.00),
+						(101, 1000, 6.50),
+                        (102, 1000, 4.00),
+                        (104, 1000, 7.90),
+                        (100, 1001, 6.50),
+                        (101, 1001, 5.80),
+                        (103, 1001, 4.60),
+                        (105, 1001, 6.80);
+
+-- Exibindo as tabelas separadamente
+SELECT * FROM Categoria;
+SELECT * FROM Produtos;
+SELECT * FROM Loja;
+SELECT * FROM ProdutoLoja;
+
+-- Exibindo dados das categorias e dos seus produtos
+SELECT Categoria.*, idProduto, descricao, marca FROM Categoria
+INNER JOIN Produtos
+ON	idCategoria = fkCategoria;
+
+-- 	Exibindo dados de uma derterminada categoria e os dados dos seus produtos
+SELECT Categoria.*, idProduto, descricao, marca FROM Categoria
+INNER JOIN Produtos
+ON	idCategoria = fkCategoria
+WHERE idCategoria = 1;
+
+-- Exibindo a média e as somas dos produtos em geral
+SELECT  ROUND(AVG(preco), 2) AS `Média dos preços`,
+		SUM(preco) AS `Soma dos preços` FROM ProdutoLoja; 
+        
+-- Exibindo o menor e o maior preço dos produtos em geral
+SELECT 	MAX(preco) AS `Maior preço`,
+		MIN(preco) AS `Menor preço` FROM ProdutoLoja;
+        
+-- Exibindo os dados de um determinado produto, os dados das lojas que o vendem e seu preço em cada loja
+SELECT idProduto, descricao, marca, idLoja, nome, dataFunc, preco FROM 	ProdutoLoja
+INNER JOIN Produtos
+ON fkProduto = idProduto
+INNER JOIN Loja 
+ON fkLoja = idLoja
+WHERE idProduto = 101;
+
+-- Exibindo os dados dos produtos, os dados das categorias correspondentes, os dados das lojas correspondentes e os preços dos produtos em cada loja
+SELECT idProduto, descricao, marca, idCategoria, Categoria.nome, idLoja, Loja.nome, dataFunc, preco FROM 	ProdutoLoja
+INNER JOIN Produtos
+ON fkProduto = idProduto
+INNER JOIN Categoria
+ON fkCategoria = idCategoria
+INNER JOIN Loja 
+ON fkLoja = idLoja;
+
+-- Exibindo a identificação do produto, a média e a soma dos preços dos produtos, agrupadas por produto
+SELECT fkProduto, ROUND(AVG(preco), 2) AS `Média dos preços`,
+SUM(preco) AS `Soma de preços`	FROM ProdutoLoja GROUP BY fkProduto;	
+                    
+                    
+-- Exibindo a identificação da loja, a média e a soma dos preços dos produtos, agrupadas por loja
+SELECT fkLoja, ROUND(AVG(preco), 2) AS `Média dos preços`,
+SUM(preco)	AS `Soma de preços` FROM ProdutoLoja GROUP BY fkLoja;
+
+-- Exibindo a identificação do produto, o menor e o maior preço, agrupado por produto
+SELECT fkProduto, MIN(preco) AS `Menor preço`,
+MAX(preco) AS `Maior preço`	FROM ProdutoLoja GROUP BY fkProduto;
+                    
+-- Exibir a identificação da loja, o menor e o maior preço, agrupado por loja
+SELECT fkLoja, MIN(preco) AS `Menor preço`,
+MAX(preco) AS `Maior preço`	FROM ProdutoLoja GROUP BY fkLoja;
+MAX(preco) AS `Maior preço`	FROM ProdutoLoja GROUP BY fkLoja;
+
+SELECT * FROM categoria;
+SELECT * FROM produtos;
+
+INSERT INTO categoria VALUES
+(null,'eletrônico');
+ 
+SELECT * FROM categoria LEFT JOIN produtos ON idCategoria = fkCategoria;
+SELECT * FROM categoria INNER JOIN produtos ON idCategoria = fkCategoria;
+SELECT * FROM categoria RIGHT JOIN produtos 
+    ON idCategoria = fkCategoria 
+    WHERE fkCategoria is not null;
+SELECT * FROM categoria RIGHT JOIN produtos 
+    ON idCategoria = fkCategoria 
+    WHERE fkCategoria is null;
+
+INSERT INTO produtos VALUES
+(null,'Smartphome','Samsung',null);
+ 
+/*
+-- Criando banco de dados
+CREATE DATABASE Produtos;
+
+-- Usando banco de dados
+USE Produtos;
+
+-- Criando tabela Categoria
+CREATE TABLE Categoria (
+	idCategoria	INT PRIMARY KEY AUTO_INCREMENT,
+    nome		VARCHAR(45)
+);
+
+-- Criando tabela Produtos
+CREATE TABLE Produtos (
+	idProduto	INT PRIMARY KEY AUTO_INCREMENT,
+    descricao	VARCHAR(100),
+	marca		VARCHAR(50),
+    fkCategoria	INT,
+    FOREIGN KEY (fkCategoria) REFERENCES Categoria (idCategoria)
+)AUTO_INCREMENT = 100;
+
+-- Criando tabela Loja
+CREATE TABLE Loja (
+	idLoja		INT PRIMARY KEY AUTO_INCREMENT,
+    nome		VARCHAR(45),
+    dataFunc	DATE 
+)AUTO_INCREMENT = 1000;
+
+-- Criando tabela associativa
+CREATE TABLE ProdutoLoja (
+	fkProduto	INT,
+    FOREIGN KEY (fkProduto) REFERENCES Produtos (idProduto),
+    fkLoja		INT,
+    FOREIGN KEY (fkLoja) REFERENCES Loja (idLoja),
+    PRIMARY KEY (fkProduto, fkLoja),
+    preco		DECIMAL(6,1)
+);
+
+-- Inserindo dados na tabela categoria
+INSERT INTO Categoria	(nome)
+VALUES 					('Chocolate'),
+						('Refrigerante');
+                    
+-- Inserindo dados na tabela produtos
+INSERT INTO Produtos	(descricao, marca, fkCategoria)
+VALUES					('Sensação', 'Lacta', 1),
+						('Diamante negro', 'Nestle', 1),
+                        ('Talento', 'Garoto', 1),
+                        ('Coca-cola', 'Coca', 2),
+                        ('Fanta uva', 'Fanta', 2),
+                        ('Sprit limão', 'Sprit', 2);
+                        
+-- Inserindo dados na tabela loja 
+INSERT INTO Loja		(nome, dataFunc)
+VALUES					('Loja 1', '2000-01-01'),
+						('Loja 2', '2001-12-12');
+
+-- Inserindo dados na tabela ProdutoLoja
+INSERT INTO ProdutoLoja	(fkProduto, fkLoja, preco)
+VALUES					(100, 1000, 5.00),
+						(101, 1000, 6.50),
+                        (102, 1000, 4.00),
+                        (104, 1000, 7.90),
+                        (100, 1001, 6.50),
+                        (101, 1001, 5.80),
+                        (103, 1001, 4.60),
+                        (105, 1001, 6.80);
+
+-- Exibindo as tabelas separadamente
+SELECT * FROM Categoria;
+SELECT * FROM Produtos;
+SELECT * FROM Loja;
+SELECT * FROM ProdutoLoja;
+
+-- Exibindo dados das categorias e dos seus produtos
+SELECT Categoria.*, idProduto, descricao, marca FROM 	Categoria
+INNER JOIN		Produtos
+ON				idCategoria = fkCategoria;
+
+-- 	Exibindo dados de uma derterminada categoria e os dados dos seus produtos
+SELECT Categoria.*, idProduto, descricao, marca FROM 	Categoria
+INNER JOIN 		Produtos
+ON				idCategoria = fkCategoria
+WHERE			idCategoria = 1;
+
+-- Exibindo a média e as somas dos produtos em geral
+SELECT  ROUND(AVG(preco), 2) AS `Média dos preços`,
+		SUM(preco) AS `Soma dos preços` FROM ProdutoLoja; 
+        
+-- Exibindo o menor e o maior preço dos produtos em geral
+SELECT 	MAX(preco) AS `Maior preço`,
+		MIN(preco) AS `Menor preço` FROM ProdutoLoja;
+        
+-- Exibindo os dados de um determinado produto, os dados das lojas que o vendem e seu preço em cada loja
+SELECT idProduto, descricao, marca, idLoja, nome, dataFunc, preco FROM 	ProdutoLoja
+INNER JOIN 		Produtos
+ON				fkProduto = idProduto
+INNER JOIN		Loja 
+ON 				fkLoja = idLoja
+WHERE 			idProduto = 101;
+
+-- Exibindo os dados dos produtos, os dados das categorias correspondentes, os dados das lojas correspondentes e os preços dos produtos em cada loja
+SELECT idProduto, descricao, marca, idCategoria, Categoria.nome, idLoja, Loja.nome, dataFunc, preco FROM 	ProdutoLoja
+INNER JOIN 		Produtos
+ON				fkProduto = idProduto
+INNER JOIN		Categoria
+ON				fkCategoria = idCategoria
+INNER JOIN		Loja 
+ON 				fkLoja = idLoja;
+
+-- Exibindo a identificação do produto, a média e a soma dos preços dos produtos, agrupadas por produto
+SELECT fkProduto, 	ROUND(AVG(preco), 2) AS `Média dos preços`,
+					SUM(preco) AS `Soma de preços`	FROM ProdutoLoja GROUP BY fkProduto;	
+                    
+                    
+-- Exibindo a identificação da loja, a média e a soma dos preços dos produtos, agrupadas por loja
+SELECT fkLoja, 	ROUND(AVG(preco), 2) AS `Média dos preços`,
+				SUM(preco)	AS `Soma de preços` FROM ProdutoLoja GROUP BY fkLoja;
+
+-- Exibindo a identificação do produto, o menor e o maior preço, agrupado por produto
+SELECT fkProduto, 	MIN(preco) AS `Menor preço`,
+					MAX(preco) AS `Maior preço`	FROM ProdutoLoja GROUP BY fkProduto;
+                    
+-- Exibir a identificação da loja, o menor e o maior preço, agrupado por loja
+SELECT fkLoja, 	MIN(preco) AS `Menor preço`,
+				MAX(preco) AS `Maior preço`	FROM ProdutoLoja GROUP BY fkLoja;
