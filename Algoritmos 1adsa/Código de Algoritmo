@@ -276,9 +276,6 @@ AULA 14b-apagando-conteudo.html:
 
 
 
-
-
-
 AULA 15_input.html:
 
 
@@ -1155,3 +1152,106 @@ index.html:
 </body>
 
 </html>
+
+
+CÓDIGOS DO REFORÇO:
+
+(Primeiro Exercicio):
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 1</title>
+</head>
+
+<body>
+    <!-- 01). Crie um programa em HTML/JS que simule a notificação de gols numa partida de
+futebol assim...
+a) Tenha um título grande com  a frase &quot;Brasil x Alemanha&quot;
+b) Abaixo desse título, os botões &quot;Gol do Brasil&quot; e &quot;Gol da Alemanha&quot;
+c) Abaixo dos botões deve haver um texto em negrito dizendo &quot;Tempo real do jogo:&quot;
+d) Sempre que o 1º botão for clicado, deve aparecer, na cor verde, a frase:
+    É goooolll do Brasil!!!
+e) Sempre que o 2º botão for clicado, deve aparecer, com cor de fundo vermelho
+escuro e letra amarela, a frase
+    É goooolll da Alemanha!!!
+f) Detalhe importante: As frase descritas em d) e e) devem ir de acumulando abaixo do
+que já existia na página. Ou seja, a primeira vez que clicar em algum dos botões o
+texto deve ficar abaixo do texto descrito em c). E depois cada vez abaixo do que já
+existia e assim por diante. -->
+
+    <h1>Brasil x Alemanha</h1>
+    <button onclick="brasil()">Gol do Brasil</button>
+    <button onclick="alemanha()">Gol da Alemanha</button> <br> <br>
+    <b>Tempo real do jogo:</b> <br> <br>
+    <span id="result"></span>
+</body>
+
+</html>
+<script>
+    function brasil() {
+        result.innerHTML += ('<span style=" color: green;">É goooolll do Brasil!!!</span> <br>');
+    }
+    function alemanha() {
+        result.innerHTML += ('<span style=" background-color: darkred; color: yellow;">É goooolll da Alemanha!!!</span> <br>');
+
+    }
+
+</script>
+
+
+(Segundo Exercicio):
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 2</title>
+</head>
+
+<body>
+    <!-- 02). Alguns clubes de futebol de São Paulo já conquistaram o mundial de clubes da
+FIFA. Dentre os grandes, o Palmeira lutar para que o troféu &quot;Cachaça 51&quot; seja
+considerado como tal, mas, até agora, a FIFA não o considera. Crie um programa em
+HTML/JS o qual:
+a) Tenha os escudos dos 4 grandes clubes de futebol de São Paulo, lado a lado (não
+pode ser usada a tag &lt;button&gt;, apenas &lt;img&gt;)
+b) Ao clicar no escudo de um deles, aparecem N taças de mundial da FIFA, lado a
+lado, conforme a quantidade que o clube tem (Corinthians: 2, Santos: 2, São Paulo: 3).
+Cada taça deve ter apenas 100px de altura.
+A imagem da taça é esta:
+
+c) Caso o clube não tenha mundial, exiba a imagem abaixo, com 200px de altura:
+
+d) Ao lado das imagens dos escudos dos times, deve haver um botão &quot;Resetar
+programa&quot;. Ao clicar nele, todas as imagens de troféu que eventualmente estiverem na
+tela, devem sumir
+
+e) Ao lado do botão do item d) deve haver outro botão, o &quot;Esconder escudos&quot;. Ao
+clicar nele, todos os escudos dos clubes somem, bem como o próprio botão &quot;Esconder
+escudos&quot;. E aparece um outro botão, o &quot;Mostrar escudos&quot;. Ao clicar nele, ele mesmo
+some e os escudos e o botão &quot;Esconder escudos&quot; reaparece. -->
+
+    <img style="height:100px;" src="https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F874.png"
+        alt="Corinthians">
+    <img style="height: 100px;" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Santos_logo.svg" alt="Santos">
+    <img style="height: 100px;"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Brasao_do_Sao_Paulo_Futebol_Clube.svg/1027px-Brasao_do_Sao_Paulo_Futebol_Clube.svg.png"
+        alt="São Paulo">
+<img src="" alt="">
+    <button onclick="qtd_taca()">Taça do Corinthians</button>
+    <span id="result"></span>
+</body>
+
+</html>
+<script>
+    function qtd_taca() {
+        result.innerHTML = `<img src="https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F874.png" `
+    }
+</script>
