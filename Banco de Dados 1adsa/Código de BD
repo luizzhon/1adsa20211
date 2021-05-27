@@ -791,3 +791,598 @@ SELECT fkProduto, 	MIN(preco) AS `Menor preço`,
 -- Exibir a identificação da loja, o menor e o maior preço, agrupado por loja
 SELECT fkLoja, 	MIN(preco) AS `Menor preço`,
 				MAX(preco) AS `Maior preço`	FROM ProdutoLoja GROUP BY fkLoja;
+
+
+SCRIPT PROVA:
+
+create database caseFuncionario;
+use caseFuncionario;
+
+create table Funcionario (
+   idFunc int primary key auto_increment,
+   nome varchar(40),
+   genero char(1),
+   check (genero = 'm' or genero ='f' or genero = 'n'),
+   -- no MySQL, versões anteriores a 8.0.16, devem usar enum no lugar do check:
+   -- genero enum('m','f','n'),
+   salario double, -- decimal(7,2) 7 significa que o número tem 7 digitos, considerando os digitos antes da 
+                         -- virgula e os depois
+                         -- 2 significa que tem 2 diginos após a vírgula
+                         -- decimal(7,2) significa um número do tipo 99999,99
+   check (salario > 0),  -- isso não funciona em versões anteriores a 8.0.16 do MySQL
+                         -- se fosse nota: check (nota >= 0 and nota <= 10)
+   cpf char(11) unique,
+   fkSupervisor int,  -- implementação de um relacionamento recursivo um para muitos
+   foreign key(fkSupervisor) references Funcionario(idFunc)
+) auto_increment = 1000;
+
+select * from Funcionario;
+desc Funcionario;
+
+-- o comando a seguir não funciona pois está tentando inserir 'x' para genero
+/*insert into Funcionario values
+    (null, 'Maria Aparecida','x',15000,'15915998788', null);
+*/
+-- inserção de um funcionário, que não tem supervisor    
+insert into Funcionario values
+    (null, 'Maria Aparecida','f',15000, '15915998788',null);
+
+-- Inserir o mesmo cpf - unique - Este comando dará erro
+insert into Funcionario values
+    (null, 'Maria Desaparecida','f', 15000, '15915998788', null);
+    
+insert into Funcionario values
+    (null, 'Vitória','f', 50000, '15915915877', 1000);
+    
+update funcionario set fkSupervisor = 1004 where idFunc = 1000;
+    
+-- inserção de mais um funcionário (supervisor deste funcionário será a Maria Aparecida - id 1000)    
+insert into Funcionario values
+	(null, 'José da Silva','m',5000,'12345678999', 1000);
+-- inserção de mais um funcionário (supervisor deste funcionário será o José da Silva - id 1001)
+insert into Funcionario values
+    (null, 'João Oliveira','m', 2000,'65498788844',1001);
+
+-- Exibir os dados dos funcionários e dos supervisores
+-- correspondentes
+-- se existissem 2 tabelas, uma Funcionario e outra Supervisor, ficaria assim o comando:
+-- select * from funcionario join supervisor on fksupervisor = idfunc;
+-- mas como a tabela é a mesma, tanto de Funcionario como de Supervisor, então o certo é:
+select * from funcionario as func join funcionario as supervisor 
+													on func.fksupervisor = supervisor.idfunc;
+                                                    
+select func.nome as NomeFunc, supervisor.nome as Supervisor 
+				from funcionario as func join funcionario as supervisor 
+								on func.fksupervisor = supervisor.idfunc;
+        
+-- Parei aqui!!
+
+-- Criação da tabela Dependente, que é uma entidade fraca em relação a Funcionario 
+create table Dependente (
+   fkFunc int,
+   foreign key (fkFunc) references Funcionario(idFunc),
+   idDep int,
+   primary key (fkFunc, idDep),  -- chave primária composta
+   nomeDep varchar(40),
+   dataNasc date,
+   parentesco varchar(45)
+);
+-- Inserção de dependentes
+insert into Dependente values
+   (1000, 1, 'Ana', '2012-10-01','filha'),
+   (1000, 2, 'Paulo', '1984-03-05', 'marido'),
+   (1001, 1, 'Antônio', '1968-09-06', 'pai'),
+   (1002, 1, 'Clara', '2014-06-01', 'irmã'),
+   (1004, 1, 'Vitório', '1994-06-01', 'irmão');
+   
+insert into Dependente values
+   (1002, 2, 'Gema', '2014-06-01', 'irmã');
+   
+insert into Dependente values
+   (1002, 4, 'Casca', '2014-06-01', 'irmã');
+
+select * from funcionario;
+-- Exibe a tabela Dependente
+select * from Dependente;
+
+-- Exibe os funcionários e seus dependentes
+select * from funcionario
+inner join dependente on fkFunc = idFunc; 
+
+-- Atualizar os dados de um dependente;
+update Dependente set nomeDep='Paulo Jonas' where fkFunc=1000 and idDep = 2;
+
+-- Inserir dados de um funcionário sem supervisor.
+insert into Funcionario values
+    (null, 'Vivian','f',1100, '12345678779',null);
+
+-- Exibir os dados dos funcionários com e sem dependentes.
+select * from funcionario left join dependente on fkFunc = idFunc;
+
+-- Exibir os dados dos funcionários sem dependentes.
+select * from funcionario
+left join dependente on fkFunc = idFunc
+where fkFunc is null;
+
+-- Exibir os dados dos funcionários, seus respectivos supervisores e seus dependentes.
+select * from funcionario as f
+inner join funcionario as s on s.idFunc = f.fkSupervisor
+inner join dependente on fkFunc = f.idFunc;
+
+-- Exibir os dados dos funcionários e seus respectivos supervisores, 
+-- funcionários sem supervisor, e seus respectivos dependentes.
+select * from funcionario as f
+left join funcionario as s on s.idFunc = f.fkSupervisor
+inner join dependente on fkFunc = f.idFunc;
+
+SEGUNDA OPÇÃO: 
+
+-- LUIZ HENRIQUE OLIVEIRA NARDI RA: 01211089
+CREATE DATABASE Exercicio11;
+USE Exercicio11;
+
+-- TABELA DEPARTAMENTO
+CREATE TABLE Departamento (
+idDepto INT PRIMARY KEY,
+nomeDepto VARCHAR (40),
+fkGerente INT,
+dataInicioGer DATE
+);
+
+-- TABELA FUNCIONARIO
+CREATE TABLE Funcionario (
+idFunc INT PRIMARY KEY,
+nomeFunc VARCHAR (30),
+salario FLOAT,
+CHECK (salario > 0),
+sexo CHAR (1),
+CHECK (sexo = 'm' OR sexo = 'f'),
+fkSupervisor INT,
+dataNasc DATE,
+fkDepto INT,
+FOREIGN KEY (fkDepto) REFERENCES Departamento (idDepto)
+);
+
+-- TABELA PROJETO
+CREATE TABLE Projeto (
+idProj INT PRIMARY KEY,
+nomeProj VARCHAR (90),
+localProj VARCHAR (80),
+fkDepto INT,
+FOREIGN KEY (fkDepto) REFERENCES Departamento (idDepto)
+);
+
+-- TABELA FUNCPROJ
+CREATE TABLE FuncProj (
+fkFunc INT,
+fkProj INT,
+PRIMARY KEY (fkFunc, fkProj),
+horas DECIMAL (3,1),
+FOREIGN KEY (fkFunc) REFERENCES Funcionario (idFunc),
+FOREIGN KEY (fkProj) REFERENCES Projeto (idProj)
+);
+
+ALTER TABLE Departamento ADD FOREIGN KEY (fkGerente) REFERENCES Funcionario (idFunc);
+
+INSERT INTO Departamento VALUES 
+(105, 'Pesquisa', NULL, '2008-05-22'),
+(104, 'Administração', NULL, '2015-01-01'),
+(101, 'Matriz', NULL, '2001-06-19');
+
+INSERT INTO Funcionario VALUES 
+(1, 'João Silva', 3500, 'm', 2, '1985-01-09', 105),
+(2, 'Fernando Wong', 4500, 'm', 8, '1975-12-08', 105),
+(3, 'Alice Sousa', 2500, 'f', 7, '1988-01-09', 104),
+(4, 'Janice Morais', 4300, 'f', 8, '1970-06-20', 104),
+(5, 'Ronaldo Lima', 3800, 'm', 1, '1982-09-15', 105),
+(6, 'Joice Leite', 2500, 'f', 1, '1992-01-09', 105),
+(7, 'Antonio Pereira', 2500, 'm', 4, '1989-03-29', 104),
+(8, 'Juliano Brito', 5500, 'm', NULL, '1957-11-10', 101);
+
+INSERT INTO Projeto VALUES 
+(1, 'Produto X', 'Santo André', 105),
+(2, 'Produto Y', 'Itu', 105),
+(3, 'Produto Z', 'São Paulo', 105),
+(10, 'Informatização', 'Mauá', 104),
+(20, 'Reorganização', 'São Paulo', 101),
+(30, 'Beneficios', 'Mauá', 104);
+
+INSERT INTO FuncProj VALUES 
+(1, 1, 32.5),
+(1, 2, 7.5),
+(5, 3, 40.0),
+(6, 1, 20.0),
+(6, 2, 20.0),
+(2, 2, 10.0),
+(2, 3, 10.0),
+(2, 10, 10.0),
+(2, 20, 10.0),
+(3, 30, 30.0),
+(3, 10, 10.0),
+(7, 10, 35.0),
+(7, 30, 5.0),
+(4, 30, 20.0),
+(4, 20, 15.0),
+(8, 20, NULL);
+
+UPDATE Departamento SET fkGerente = 2 WHERE idDepto = 105;
+
+UPDATE Departamento SET fkGerente = 7 WHERE idDepto = 104;
+
+UPDATE Departamento SET fkGerente = 8 WHERE idDepto = 101;
+
+SELECT * FROM Departamento;
+
+SELECT * FROM Funcionario;
+
+SELECT * FROM Projeto;
+
+SELECT * FROM FuncProj;
+
+-- INFELIZMENTE NÃO VAI DAR CERTO, POIS O IDFUNC NÃO PODE SER NULO.
+INSERT INTO Funcionario VALUES
+(null, "Cecilia Ribeiro", 2800, "f", null, "1980-04-05", 104);
+
+-- NÃO VAI DAR CERTO, O ID 3 ESTÁ DUPLICADO.
+INSERT INTO Funcionario VALUES
+(3, "Alice Souza", 2800, "f", 4, "1980-04-05", 104);
+
+-- NÃO VAI DAR CERTO, O FK 107 NÃO EXISTE.
+INSERT INTO Funcionario VALUES 
+(9, "Cecília Ribeiro", 2800, "f", 4, "1980-04-05", 107);
+
+-- FUNCIONOUUUU ;)
+INSERT INTO Funcionario VALUES
+(9, "Cecília Ribeiro", 2800, "f", 4, "1980-04-05", 104);
+
+-- FUNCIONOUUUU ;)
+DELETE FROM FuncProj WHERE fkFunc = 3 AND fkProj = 10;
+
+-- FUNCIONARIO ESTÁ ASSOCIADO A UM PROJETO.
+DELETE FROM Funcionario WHERE idFunc = 4;
+
+-- FUNCIONARIO ESTÁ ASSOCIADO A UM PROJETO.
+DELETE FROM Funcionario WHERE idFunc = 2;
+
+-- FUNCIONOUUUU ;)
+UPDATE Funcionario SET salario = 2800 WHERE idFunc = 3;
+
+-- FUNCIONOUUUU ;)
+UPDATE Funcionario SET fkDepto = 101 WHERE idFunc = 3;
+
+-- NÃO FUNCIONOU, POIS FK 107 NÃO EXISTE.
+UPDATE Funcionario SET fkDepto = 107 WHERE idFunc = 3;
+
+SELECT nomeFunc, dataNasc, salario FROM Funcionario WHERE nomeFunc = "João Silva";
+
+SELECT DISTINCT salario FROM Funcionario;
+
+SELECT salario FROM Funcionario ORDER BY nomeFunc;
+
+SELECT * FROM Funcionario ORDER BY salario DESC;
+
+SELECT * FROM Funcionario WHERE salario > 2000 AND salario < 4000;
+
+SELECT nomeFunc, salario FROM Funcionario WHERE nomeFunc LIKE "j%";
+
+SELECT nomeFunc, salario FROM Funcionario WHERE nomeFunc LIKE "%a";
+
+SELECT nomeFunc, salario FROM Funcionario WHERE nomeFunc LIKE "__n%";
+
+SELECT nomeFunc, dataNasc FROM Funcionario WHERE nomeFunc LIKE "%s____";
+
+SELECT * FROM Funcionario INNER JOIN Departamento ON fkDepto = idDepto WHERE nomeDepto = "Pesquisa";
+
+SELECT * FROM Funcionario INNER JOIN Departamento ON fkDepto = idDepto WHERE nomeDepto = "Pesquisa" AND salario > 3500;
+
+SELECT * FROM Funcionario INNER JOIN Departamento ON fkDepto = idDepto WHERE nomeDepto = "Pesquisa" AND nomeFunc LIKE "J%";
+
+SELECT Funcionario.idFunc AS Funcionario, Funcionario.nomeFunc AS NomeFuncionario, Supervisor.idFunc AS idSupervisor, Supervisor.nomeFunc AS NomeSupervisor
+FROM Funcionario AS Funcionario
+INNER JOIN Funcionario AS Supervisor
+ON funcionario.fkSupervisor = Supervisor.idFunc;
+
+SELECT Proj.idProj AS idProjeto, Proj.fkDepto AS 'Departamento' , Ger.nomeFunc AS Gerente, Ger.dataNasc AS 'Data Nascimento' FROM Projeto AS Proj
+INNER JOIN Departamento ON fkDepto = idDepto INNER JOIN Funcionario AS Ger ON fkGerente = idFunc 
+WHERE Proj.localProj = 'São Paulo';
+
+SELECT Func.idFunc AS idFuncionario, Func.nomeFunc AS Funcionario, FuncProj.fkProj AS Projeto, Proj.nomeProj AS 'Nome Projeto', FuncProj.horas AS 'Quantidade de Horas' FROM FuncProj AS FuncProj
+INNER JOIN Funcionario AS Func ON fkFunc = idFunc INNER JOIN Projeto AS Proj ON fkProj = idProj;
+
+SELECT nomeFunc FROM Funcionario WHERE dataNasc < "1980-01-01";
+
+SELECT count(DISTINCT(salario)) AS "Salários diferentes" FROM Funcionario;
+
+SELECT count(DISTINCT(localProj)) AS "Locais diferentes" FROM Projeto;
+
+SELECT TRUNCATE(AVG(salario),2) AS "Média salarial", TRUNCATE(sum(salario),2) AS "Soma dos salários" FROM Funcionario;
+
+SELECT min(salario), max(salario) FROM Funcionario;
+
+SELECT idDepto, TRUNCATE(AVG(salario),2) AS "Média salarial", TRUNCATE(sum(salario),2) AS "Soma dos salários" FROM Funcionario INNER JOIN Departamento ON idDepto = fkDepto GROUP BY idDepto;
+
+SELECT idDepto, min(salario), max(salario) FROM Funcionario INNER JOIN Departamento ON idDepto = fkDepto GROUP BY idDepto;
+
+INSERT INTO Funcionario VALUES 
+(10, "José da Silva", 1800, "m", 3, "2000-10-12", NULL),
+(11, "Benedito Almeida", 1200, "m", 5, "2001-09-01", NULL);
+
+INSERT INTO Departamento VALUES 
+(110, "RH", 3, "2018-11-10");
+
+
+TERCEIRA OPÇÃO:
+
+USE faculdade;
+
+CREATE TABLE aula (
+	idAula int primary key auto_increment,
+    nomeAula varchar(75),
+    tipo char(1),
+    check (tipo = 'o' or tipo = 'h' or tipo = 'p'),
+    dtAula date,
+    mensagem varchar(100)
+);
+
+INSERT INTO aula values 
+	(null, 'Apresentação da disciplina e primeiros conceitos',
+		'o', '2021-02-04', 'Conhecendo Banco de Dados'),
+    (null, 'Continuação de conceitos e primeiros comandos SQL',
+		'o', '2021-02-11', 'O primeiro comando a gente nunca esquece');
+    
+SELECT * FROM aula;
+
+INSERT INTO aula (nomeAula, tipo, dtAula, mensagem) values 
+	('Permissão de usuário e comandos gerais', 'p', 
+    '2021-02-18', 'Sejam bem vindos!');
+  
+INSERT INTO aula (nomeAula, tipo, dtAula, mensagem) values 
+	('Linha de comando - CLI - MySQL Server Client', 'p', 
+    '2021-02-25', 'Codando no client!');
+
+    
+INSERT INTO aula (nomeAula, tipo, dtAula, mensagem) values 
+	('Avaliaçao Continuada I', 'p', 
+    '2021-03-04', 'Boa prova!');
+    
+INSERT INTO aula (nomeAula, tipo, dtAula, mensagem) values 
+	('Entregáveis de banco de dados', 'o', 
+    '2021-03-11', 'Boa Sprint!');
+    
+INSERT INTO aula (nomeAula, tipo, dtAula, mensagem) values 
+	('Chave estrangeira, Constraint e Aliases', 'o', 
+    '2021-03-18', 'Agora complicou! =)');
+    
+-- Aula 07
+SELECT * FROM aula;
+select * from aluno;
+
+-- criar a tabela chamada
+CREATE TABLE chamada (
+	idChamada int primary key auto_increment,
+    fkAluno char(8), -- chave estrangeira referente a tabela aluno
+    foreign key (fkAluno) references aluno(ra), -- configuração chave estrangeira fkAluno
+    dtPresenca datetime default current_timestamp,
+    presenca char(3),
+    check (presenca = 'sim' or presenca = 'não'),
+    fkAula int, -- chave estrangeira referente a tabela aula
+    foreign key (fkAula) references aula(idAula) -- configuração chave estrangeira fkAula
+) auto_increment=20000;
+
+-- exibir os dados da tabela chamada;
+select * from chamada;
+
+-- inserir dados na tabela chamada;
+insert into chamada (fkAluno, presenca, fkAula) values
+	('01211999','sim',7);
+insert into chamada (fkAluno, presenca, fkAula) values
+	('01211025','sim',7);
+    
+-- exibir todos os dados da tabela chamada e o nome do aluno
+select chamada.*, aluno.nome from aluno join chamada 
+	on fkAluno = ra;
+ 
+-- exibir todos os dados da tabela chamada e a mensagem da aula do dia 18/03.
+select chamada.*, aula.mensagem from aula inner join chamada 
+	on fkAula = idAula where dtAula = '2021-03-18';
+
+-- AVANÇADO - JOIN ENTRE 3 TABELAS
+select * from aluno join chamada on fkAluno = ra
+	join aula on fkAula = idAula;
+    
+-- Bon estudos!
+	use faculdade;
+    select * from aula;
+    
+    start transaction;
+    
+    insert into aula (nomeAula, tipo, dtAula, mensagem) values
+    ('Dicionário de Dados e Start Transaction', 'o',
+    '2021-05-13','Só alegria!');
+    
+    select * from aula;
+    rollback;
+    
+    select * from aula;
+    
+    
+    
+    QUARTA OPÇÃO:
+    
+    create database caseFuncionario;
+use caseFuncionario;
+
+create table Funcionario (
+   idFunc int primary key auto_increment,
+   nome varchar(40),
+   genero char(1),
+   check (genero = 'm' or genero ='f' or genero = 'n'),
+   -- no MySQL, versões anteriores a 8.0.16, devem usar enum no lugar do check:
+   -- genero enum('m','f','n'),
+   salario double, -- decimal(7,2) 7 significa que o número tem 7 digitos, considerando os digitos antes da 
+                         -- virgula e os depois
+                         -- 2 significa que tem 2 diginos após a vírgula
+                         -- decimal(7,2) significa um número do tipo 99999,99
+   check (salario > 0),  -- isso não funciona em versões anteriores a 8.0.16 do MySQL
+                         -- se fosse nota: check (nota >= 0 and nota <= 10)
+   cpf char(11) unique,
+   fkSupervisor int,  -- implementação de um relacionamento recursivo um para muitos
+   foreign key(fkSupervisor) references Funcionario(idFunc)
+) auto_increment = 1000;
+
+select * from Funcionario;
+desc Funcionario;
+
+-- o comando a seguir não funciona pois está tentando inserir 'x' para genero
+/*insert into Funcionario values
+    (null, 'Maria Aparecida','x',15000,'15915998788', null);
+*/
+-- inserção de um funcionário, que não tem supervisor    
+insert into Funcionario values
+    (null, 'Maria Aparecida','f',15000, '15915998788',null);
+
+-- Inserir o mesmo cpf - unique - Este comando dará erro
+insert into Funcionario values
+    (null, 'Maria Desaparecida','f', 15000, '15915998788', null);
+    
+-- inserção de mais um funcionário (supervisor deste funcionário será a Maria Aparecida - id 1000)    
+insert into Funcionario values
+	(null, 'José da Silva','m',5000,'12345678999', 1000);
+-- inserção de mais um funcionário (supervisor deste funcionário será o José da Silva - id 1001)
+insert into Funcionario values
+    (null, 'João Oliveira','m', 2000,'65498788844',1001);
+
+-- Exibir os dados dos funcionários e dos supervisores
+-- correspondentes
+-- se existissem 2 tabelas, uma Funcionario e outra Supervisor, ficaria assim o comando:
+-- select * from funcionario join supervisor on fksupervisor = idfunc;
+-- mas como a tabela é a mesma, tanto de Funcionario como de Supervisor, então o certo é:
+select * from funcionario as func join funcionario as supervisor 
+															on func.fksupervisor = supervisor.idfunc;
+        
+-- Parei aqui!!
+
+create database caseFuncionario;
+use caseFuncionario;
+
+create table Funcionario (
+   idFunc int primary key auto_increment,
+   nome varchar(40),
+   genero char(1),
+   check (genero = 'm' or genero ='f' or genero = 'n'),
+   -- no MySQL, versões anteriores a 8.0.16, devem usar enum no lugar do check:
+   -- genero enum('m','f','n'),
+   salario double, -- decimal(7,2) 7 significa que o número tem 7 digitos, considerando os digitos antes da 
+                         -- virgula e os depois
+                         -- 2 significa que tem 2 diginos após a vírgula
+                         -- decimal(7,2) significa um número do tipo 99999,99
+   check (salario > 0),  -- isso não funciona em versões anteriores a 8.0.16 do MySQL
+                         -- se fosse nota: check (nota >= 0 and nota <= 10)
+   cpf char(11) unique,
+   fkSupervisor int,  -- implementação de um relacionamento recursivo um para muitos
+   foreign key(fkSupervisor) references Funcionario(idFunc)
+) auto_increment = 1000;
+
+select * from Funcionario;
+desc Funcionario;
+
+-- o comando a seguir não funciona pois está tentando inserir 'x' para genero
+/*insert into Funcionario values
+    (null, 'Maria Aparecida','x',15000,'15915998788', null);
+*/
+-- inserção de um funcionário, que não tem supervisor    
+insert into Funcionario values
+    (null, 'Maria Aparecida','f',15000, '15915998788',null);
+
+-- Inserir o mesmo cpf - unique - Este comando dará erro
+insert into Funcionario values
+    (null, 'Maria Desaparecida','f', 15000, '15915998788', null);
+    
+insert into Funcionario values
+    (null, 'Vitória','f', 50000, '15915915877', 1000);
+    
+update funcionario set fkSupervisor = 1004 where idFunc = 1000;
+    
+-- inserção de mais um funcionário (supervisor deste funcionário será a Maria Aparecida - id 1000)    
+insert into Funcionario values
+	(null, 'José da Silva','m',5000,'12345678999', 1000);
+-- inserção de mais um funcionário (supervisor deste funcionário será o José da Silva - id 1001)
+insert into Funcionario values
+    (null, 'João Oliveira','m', 2000,'65498788844',1001);
+
+-- Exibir os dados dos funcionários e dos supervisores
+-- correspondentes
+-- se existissem 2 tabelas, uma Funcionario e outra Supervisor, ficaria assim o comando:
+-- select * from funcionario join supervisor on fksupervisor = idfunc;
+-- mas como a tabela é a mesma, tanto de Funcionario como de Supervisor, então o certo é:
+select * from funcionario as func join funcionario as supervisor 
+													on func.fksupervisor = supervisor.idfunc;
+                                                    
+select func.nome as NomeFunc, supervisor.nome as Supervisor 
+				from funcionario as func join funcionario as supervisor 
+								on func.fksupervisor = supervisor.idfunc;
+        
+-- Parei aqui!!
+
+-- Criação da tabela Dependente, que é uma entidade fraca em relação a Funcionario 
+create table Dependente (
+   fkFunc int,
+   foreign key (fkFunc) references Funcionario(idFunc),
+   idDep int,
+   primary key (fkFunc, idDep),  -- chave primária composta
+   nomeDep varchar(40),
+   dataNasc date,
+   parentesco varchar(45)
+);
+-- Inserção de dependentes
+insert into Dependente values
+   (1000, 1, 'Ana', '2012-10-01','filha'),
+   (1000, 2, 'Paulo', '1984-03-05', 'marido'),
+   (1001, 1, 'Antônio', '1968-09-06', 'pai'),
+   (1002, 1, 'Clara', '2014-06-01', 'irmã'),
+   (1004, 1, 'Vitório', '1994-06-01', 'irmão');
+   
+insert into Dependente values
+   (1002, 2, 'Gema', '2014-06-01', 'irmã');
+   
+insert into Dependente values
+   (1002, 4, 'Casca', '2014-06-01', 'irmã');
+
+select * from funcionario;
+-- Exibe a tabela Dependente
+select * from Dependente;
+
+-- Exibe os funcionários e seus dependentes
+select * from funcionario
+inner join dependente on fkFunc = idFunc; 
+
+-- Atualizar os dados de um dependente;
+update Dependente set nomeDep='Paulo Jonas' where fkFunc=1000 and idDep = 2;
+
+-- Inserir dados de um funcionário sem supervisor.
+insert into Funcionario values
+    (null, 'Vivian','f',1100, '12345678779',null);
+
+-- Exibir os dados dos funcionários com e sem dependentes.
+select * from funcionario left join dependente on fkFunc = idFunc;
+
+-- Exibir os dados dos funcionários sem dependentes.
+select * from funcionario
+left join dependente on fkFunc = idFunc
+where fkFunc is null;
+
+-- Exibir os dados dos funcionários, seus respectivos supervisores e seus dependentes.
+select * from funcionario as f
+inner join funcionario as s on s.idFunc = f.fkSupervisor
+inner join dependente on fkFunc = f.idFunc;
+
+-- Exibir os dados dos funcionários e seus respectivos supervisores, 
+-- funcionários sem supervisor, e seus respectivos dependentes.
+select * from funcionario as f
+left join funcionario as s on s.idFunc = f.fkSupervisor
+inner join dependente on fkFunc = f.idFunc;
+
+
+
+
+    
