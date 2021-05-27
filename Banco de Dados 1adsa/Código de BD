@@ -1383,6 +1383,80 @@ left join funcionario as s on s.idFunc = f.fkSupervisor
 inner join dependente on fkFunc = f.idFunc;
 
 
+-- Criar o banco de dados ac3-seuNome (ac3-vivian);
+CREATE DATABASE AC3LUIZHENRIQUE;
+
+-- Selecionar o banco de dados criado;
+USE AC3LUIZHENRIQUE;
+
+ -- Criar as tabelas, configurar as chaves estrangeiras e inserir dados;
+ CREATE TABLE Login (
+idLogin INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45),
+email VARCHAR (45),
+senha VARCHAR (20)
+);
+
+CREATE TABLE Cadastro (
+idCadastro INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45),
+email VARCHAR (45) UNIQUE,
+senha VARCHAR (20),
+telefone CHAR (11),
+dataNasc DATE,
+fkLogin INT,
+FOREIGN KEY (fkLogin) REFERENCES Login (idLogin)
+);
+
+CREATE TABLE Usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+tipoDiabetes CHAR (1),
+fkCadastro INT,
+FOREIGN KEY (fkCadastro) REFERENCES Cadastro (idCadastro)
+);
+
+CREATE TABLE informacoes (
+idInformacaoUsuario INT,
+nomeUsuario VARCHAR (45),
+emailUsuario VARCHAR (45),
+senhaUsuario VARCHAR (20),
+fkLogin INT,
+FOREIGN KEY (fkLogin) REFERENCES Login (idLogin),
+fkUsuario INT, 
+FOREIGN KEY (fkUsuario) REFERENCES Usuario (idUsuario),
+PRIMARY KEY (fkLogin, fkUsuario)
+);
+
+INSERT INTO Login VALUES 
+(null, 'Larissa', 'Larissa@gmail.com', 'lari'),
+(null, 'Pedro', 'Pedro@gmail.com', 'pedro'),
+(null, 'Vivian', 'Vivian@gmail.com', 'vivian'),
+(null, 'Julia', 'Julia@gmail.com', 'julia');
+
+INSERT INTO Cadastro VALUES 
+(null, 'Larissa', 'Larissa@gmail.com', 'lari','11974385921','2001-06-11',1),
+(null, 'Pedro', 'Pedro@gmail.com', 'pedro','11965974592','2012-04-14',2),
+(null, 'Vivian', 'Vivian@gmail.com', 'vivian','11957435967','2021-01-03',3),
+(null, 'Julia', 'Julia@gmail.com', 'julia','11948349321','2020-10-21',4);
+
+INSERT INTO Usuario VALUES
+(null,'1',1),
+(null,'2',2),
+(null,'3',3),
+(null,'4',4);
+
+INSERT INTO Informacoes VALUES 
+(1,'Larissa','Larissa@gmail.com','lari',1,1),
+(2,'Pedro','Pedro@gmail.com','pedro',2,2),
+(3,'Vivian','Vivian@gmail.com','vivian',3,3),
+(4,'Julia','Julia@gmail.com','julia',4,4);
+
+-- Exibir os dados das tabelas criadas separadamente;
+SELECT * FROM Login;
+SELECT * FROM Cadastro;
+SELECT * FROM Usuario;
+SELECT * FROM informacoes;
+
 
 
     
