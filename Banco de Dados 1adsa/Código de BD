@@ -1458,5 +1458,49 @@ SELECT * FROM Usuario;
 SELECT * FROM informacoes;
 
 
-
+Reforço 08/06
     
+    create database LuizHenriqueFilme;
+use LuizHenriqueFilme;
+
+create table Filmes (
+idFilmes int auto_increment,
+nomeFilme varchar (45),
+genero varchar (45),
+fkDiretores int,
+primary key (idFilmes, fkDiretores)
+)auto_increment=1000;
+
+create table Diretores (
+idDiretores int primary key auto_increment,
+nomeDiretor varchar (45),
+País varchar (45),
+dataNasc date
+);
+
+create table Atores (
+idAtores int primary key,
+nomeAtor varchar (45)
+)auto_increment=100;
+
+
+create table Filmes_Atores (
+fkFilmes int,
+fkAtores int,
+nomePersonagem varchar (45),
+ganhoAtor float,
+primary key (fkFilmes, fkAtores),
+foreign key (fkFilmes) references Filmes (idFilmes),
+foreign key (fkAtores) references Atores (idAtores)
+);
+
+ALTER TABLE Filmes 
+ADD foreign key (fkDiretores) references Diretores (idDiretores);
+
+insert into Filmes values 
+(null,'Invocação do Mal 3','Terror',1),
+(null,'Megatubarão','Suspense',2);
+
+insert into Diretores values 
+(null, 'Jason', 'Estados Unidos', 1979-01-14),
+(null, 'Gil','Brasil','1890-03-03');
