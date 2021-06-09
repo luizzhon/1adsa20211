@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercicio 08</title>
+</head>
+
+<body>
+    <button onclick="quatroingressos()">4 Ingressos</button>
+    <button onclick="seisingressos()">6 Ingressos</button>
+    <button onclick="oitoingressos()">8 Ingressos</button>
+    <div id="ingressos"></div>
+
+</body>
+
+</html>
+<script>
+
+    function quatroingressos() {
+        var ing = 4;
+        var preco = ((8.00/12.00)-1)*100;
+        ingressos.innerHTML = `Ao comprar ${ing} ingressos, você pagou ${preco.toFixed(2)}% a menos`;
+
+    }
+    function seisingressos() {
+        var ing = 6;
+        var preco = ((7.00/12.00)-1)*100;
+        ingressos.innerHTML = `Ao comprar ${ing} ingressos, você pagou ${preco.toFixed(2)}% a menos`;
+
+    }
+    function oitoingressos() {
+        var ing = 8
+        var preco = ((6.00/12.00)-1)*100;
+        ingressos.innerHTML = `Ao comprar ${ing} ingressos, você pagou ${preco.toFixed(2)}% a menos`;
+
+    }
+</script>
