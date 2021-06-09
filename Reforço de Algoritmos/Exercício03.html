@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercício02</title>
+    <style>
+        * {
+            border: 0px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #semaforo {
+            background-color: black;
+            width: 15%;
+            height: 550px;
+        }
+
+        #vermelho, #amarelo, #verde{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Semáforos.</h2>
+
+    <div id="semaforo">
+        <div id="vermelho">
+            <img onclick="cor_vermelha()" src="https://www.iasaude.pt/UCAD/images/Site/familia/BANNER-07.png" width="180px;">
+        </div>
+
+        <div id="amarelo">
+            <img onclick="cor_amarela()" src="https://cdn-0.emojis.wiki/emoji-pics/facebook/yellow-circle-facebook.png" width="180px;">
+        </div>
+
+        <div id="verde">
+            <img onclick="cor_verde()" src="https://images.emojiterra.com/google/android-10/512px/1f7e2.png" width="185px;">
+        </div>
+    </div>
+
+    <div id="msg"></div>
+
+</body>
+
+</html>
+
+<script>
+
+    function cor_vermelha(){
+
+        vermelho.innerHTML = `<img src="https://www.publicdomainpictures.net/pictures/310000/nahled/red-circle.png" width="180px";>`;
+        amarelo.innerHTML = `<img onclick="cor_amarela()" src="https://cdn-0.emojis.wiki/emoji-pics/facebook/yellow-circle-facebook.png" width="180px;">`;
+        verde.innerHTML = `<img onclick="cor_verde()" src="https://images.emojiterra.com/google/android-10/512px/1f7e2.png" width="185px;">`;
+    }
+
+    function cor_amarela(){
+
+        amarelo.innerHTML = `<img src="https://www.seekpng.com/png/full/427-4274377_globo-smbolos-e-bolas-single-colour-balloons.png" width="180px;">`;
+        vermelho.innerHTML = `<img onclick="cor_vermelha()" src="https://www.iasaude.pt/UCAD/images/Site/familia/BANNER-07.png" width="180px;">`;
+        verde.innerHTML = `<img onclick="cor_verde()" src="https://images.emojiterra.com/google/android-10/512px/1f7e2.png" width="185px;">`;
+    }
+
+    function cor_verde(){
+
+        verde.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" width="185px;">`;
+        amarelo.innerHTML = `<img onclick="cor_amarela()" src="https://cdn-0.emojis.wiki/emoji-pics/facebook/yellow-circle-facebook.png" width="180px;">`;
+        vermelho.innerHTML = `<img onclick="cor_vermelha()" src="https://www.iasaude.pt/UCAD/images/Site/familia/BANNER-07.png" width="180px;">`;
+    }
+
+
+</script>
