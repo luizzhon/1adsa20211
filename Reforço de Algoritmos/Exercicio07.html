@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 7 - Mortal Kombat</title>
+</head>
+
+<body>
+    <button onclick="iniciar()">Iniciar o jogo</button> <br>
+    <div id="imagens" style="display: none;"><img onclick="scorpion()"
+            src="https://www.comboinfinito.com.br/principal/wp-content/uploads/2019/08/mortal-kombat.jpg" height="200px"
+            alt="Scorpion"> <br>
+            <div style="background-color: green;">Barra de vida</div>
+        <img onclick="subzero()" src="https://ae01.alicdn.com/kf/HTB1Y8WolHZnBKNjSZFrq6yRLFXai/Sub-zero-mortal-kombat-jogo-arte-cartaz-de-seda-tecido-arte-decora-o-da-parede-12x18.jpg_Q90.jpg_.webp"
+            height="200px" alt="Sub zero">
+            <div style="background-color: green;">Barra de vida</div> <br>
+           <span> Golpes sofridos pelo Lutador 1 = 0</span> <br>
+           <span>Golpes sofridos pelo Lutador 2 = 0</span>
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    function iniciar() {
+        if (imagens.style.display == 'none') {
+            imagens.style.display = 'block';
+        } else {
+            imagens.style.display = 'none';
+        }
+    }
+    var vida1 = 100;
+    var vida2 = 100;
+    
+    function scorpion() {
+        vida1= vida - 5
+    }
+    function subzero() {
+        vida2 - 5
+    }
+</script>
