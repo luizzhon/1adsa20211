@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exercício01</title>
-    <style>
-
-        #alemanha{
-            background-color: red;
-            color: yellow;
-        }
-
-    </style>
 </head>
-    <body>
 
-        <h2>Brasil x Alemanha</h2>
+<body>
 
-        <button onclick="brasil()">Gol do Brasil</button>
-        <button onclick="alemanha()">Gol da Alemanha</button><br>
+    <h2>Brasil x Alemanha</h2>
 
-        <h3><b>Tempo real do jogo</b></h3>
+    <button onclick="brasil()">Gol do Brasil</button>
+    <button onclick="alemanha()">Gol da Alemanha</button><br>
 
-        <div id="msg"></div>
-        
-    </body>
+    <h3><b>Tempo real do jogo</b></h3>
+
+    <div id="result"></div>
+
+</body>
+
 </html>
 
 <script>
-
-    function brasil(){
-
-        msg.innerHTML += `<span style="color: green">É goooolll do Brasil!!!</span><br>`;
-
+    function brasil() {
+        result.innerHTML += `<span style="color: green">É goooolll do Brasil!!!</span><br>`;
     }
-
-    function alemanha(){
-
-        msg.innerHTML += `<span id="alemanha">É goooolll do Brasil!!!</span><br>`;
-
+    function alemanha() {
+        result.innerHTML += `<span style="color: yellow; background-color: red;">É goooolll do Brasil!!!</span><br>`;
     }
 
 </script>
