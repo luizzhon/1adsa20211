@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <button onclick="oitopassagens()">08 passagens</button>
-    <button onclick="vintepassagens()">20 passagens</button>
-    <button onclick="cinquentapassagens()">50 passagens</button>
+    <button style="background-color: black; color: white;" onclick="oitopassagens()">08 passagens</button>
+    <button style="background-color: black; color: white;" onclick="vintepassagens()">20 passagens</button>
+    <button style="background-color: black; color: white;" onclick="cinquentapassagens()">50 passagens</button>
     <div id="passagens"></div>
 
 </body>
@@ -21,23 +21,23 @@
 
     function oitopassagens() {
         var passe = 8;
-        var valor = ((4.06 / 4.40) - 1) * 100;
-        var ganho = 4.06 + 4.40
+        var valor = Number((4.06 / 4.40) - 1) * 100;
+        var ganho = 0;
         passagens.innerHTML = `Ao comprar ${passe} passagens, você pagou ${valor.toFixed(2)}% a menos, É como se tivesse
-ganhado ${ganho.toFixed(1)} passagens de "bônus".`;
+ganhado ${(ganho/4.40).toFixed(0)} passagens de "bônus".`;
     }
     function vintepassagens() {
         var passe = 20;
-        var valor = ((3.93 / 4.40) - 1) * 100;
-        var ganho = 3.93 + 4.40
+        var valor =  Number((3.93 / 4.40) - 1) * 100;
+        var ganho =  Number(88.00 - 78.65)
         passagens.innerHTML = `Ao comprar ${passe} passagens, você pagou ${valor.toFixed(2)}% a menos, É como se tivesse
-ganhado ${ganho.toFixed(1)} passagens de "bônus".`;
+ganhado ${(ganho/4.40).toFixed(0)} passagens de "bônus".`;
     }
     function cinquentapassagens() {
         var passe = 50;
         var valor = ((3.83 / 4.40) - 1) * 100;
-        var ganho = 3.83 + 4.40
+        var ganho =  Number(220.00 - 191.41)
         passagens.innerHTML = `Ao comprar ${passe} passagens, você pagou ${valor.toFixed(2)}% a menos, É como se tivesse
-ganhado ${ganho.toFixed(1)} passagens de "bônus".`;
+ganhado ${(ganho/4.40).toFixed(0)} passagens de "bônus".`;
     }
 </script>

@@ -9,20 +9,14 @@
 </head>
 
 <body>
-
     <h2>Brasil x Alemanha</h2>
-
-    <button onclick="brasil()">Gol do Brasil</button>
-    <button onclick="alemanha()">Gol da Alemanha</button><br>
-
+    <button style="background-color: green; color: white;" onclick="brasil()">Gol do Brasil</button>
+    <button style="background-color: red; color: white;" onclick="alemanha()">Gol da Alemanha</button><br>
     <h3><b>Tempo real do jogo</b></h3>
-
     <div id="result"></div>
-
 </body>
 
 </html>
-
 <script>
     function brasil() {
         result.innerHTML += `<span style="color: green">É goooolll do Brasil!!!</span><br>`;
@@ -30,5 +24,4 @@
     function alemanha() {
         result.innerHTML += `<span style="color: yellow; background-color: red;">É goooolll do Brasil!!!</span><br>`;
     }
-
 </script>
