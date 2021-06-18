@@ -1504,3 +1504,62 @@ insert into Filmes values
 insert into Diretores values 
 (null, 'Jason', 'Estados Unidos', 1979-01-14),
 (null, 'Gil','Brasil','1890-03-03');
+
+
+[21:51, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: UPDATE nome da tabela SET nome do campo = 'o que você quer mudar' WHERE id da tabela  = número ou campo;
+[21:54, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: DELETE FROM nome da tabela WHERE Id da tabela = número ou campo;
+[22:10, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: INNER JOIN:
+
+SELECT * FROM funcionario (nome da tabela) INNER JOIN dependente (nome da tabela secundária) on  fkFunc (exemplo com fk)=  idFunc;
+[22:10, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: TIPOS DE SELECTS:
+
+Todos os dados de todos os dispositivos do tipo Smartphone em ordem alfabética do modelo:
+
+SELECT * FROM dispositivo (nome da tabela) WHERE tipo (campo da tabela) = smartphone  (atributo da tabela tipo) ORDER BY modelo;
+
+Listar apenas os nomes dos modelos que começam com IP:
+
+SELECT modelo  (campo da tabela) FROM dispositivo ( nome da tabela) WHERE modelo (nome dos modelos) LIKE 'IP%';
+[22:12, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: INSERT INTO Funcionario (nome da tabela) VALUES 
+(null (auto increment), campo1,campo2),
+(1, campo1,campo2);
+[22:24, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: CRIAÇÃO DAS TABELAS COM FOREIGN KEYS:
+
+CREATE TABLE Login (
+idLogin INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45),
+email VARCHAR (45),
+senha VARCHAR (20)
+); 
+
+CREATE TABLE Cadastro (
+idCadastro INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45),
+email VARCHAR (45) UNIQUE,
+senha VARCHAR (20),
+telefone CHAR (11),
+dataNasc DATE,
+fkLogin INT,
+FOREIGN KEY (fkLogin) REFERENCES Login (idLogin)
+);
+
+CREATE TABLE Usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+tipoDiabetes CHAR (1),
+fkCadastro INT,
+FOREIGN KEY (fkCadastro) REFERENCES Cadastro (idCadastro)
+);
+
+CREATE TABLE informacoes (
+idInformacaoUsuario INT,
+nomeUsuario VARCHAR (45),
+emailUsuario VARCHAR (45),
+senhaUsuario VARCHAR (20),
+fkLogin INT,
+FOREIGN KEY (fkLogin) REFERENCES Login (idLogin),
+fkUsuario …
+[22:25, 17/06/2021] 𝕷𝖚𝖎𝖟 𝕳𝖊𝖓𝖗𝖎𝖖𝖚𝖊 𝕺𝖑𝖎𝖛𝖊𝖎𝖗𝖆 ♥️: ALTER TABLE Empresa MODIFY nomeEmpresa varchar(40);
+
+ALTER TABLE NomeDaTabela MODIFY NomeDoCampo TipoDoCampo;
+
+Exemplo: ALTER TABLE empresa MODIFY NomeEmpresa VARCHAR(50);
