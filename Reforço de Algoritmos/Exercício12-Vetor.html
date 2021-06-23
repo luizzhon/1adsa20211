@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício - Vetor</title>
+</head>
+
+<body>
+    Qual o nome do produto? <input type="text" id="nome_produto" placeholder="Insira o nome do produto"> <br>
+    Qual o preço de compra? <input type="text" id="preco_compra" placeholder="Insira o preço de compra"> <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="relatorio()">Relatório de estoque</button> <br>
+    <div id="result"></div>
+
+</body>
+
+</html>
+<script>
+    var produtos = [];
+    var precos = [];
+
+    function cadastrar() {
+        produtos.push(nome_produto.value);
+        precos.push(Number(preco_compra.value));
+    }
+    function relatorio() {
+        resut.innerHTML = 'Total de produtos: ${produtos.length}<br><br>';
+
+        var maiorPreco = precos[0];
+        var maiorNome = produtos[0];
+
+        for (var contador = 0; contador < produtos.length; contador++) {
+            result.innerHTML += 'Produto ${contador + 1}: ${produtos[contador]} <br>Preço de compra: R$ ${precos[contador].tofixed(2)}. Vender por R$ ${(precos[contador] * 1.25).tofixed(2)};<br><br>';
+        }
+    }
+</script>
