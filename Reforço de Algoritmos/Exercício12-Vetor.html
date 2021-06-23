@@ -33,7 +33,7 @@
         var maiorNome = produtos[0];
 
         for (var contador = 0; contador < produtos.length; contador++) {
-            result.innerHTML += 'Produto ${contador + 1}: ${produtos[contador]} <br>Preço de compra: R$ ${precos[contador].tofixed(2)}. Vender por R$ ${(precos[contador] * 1.25).tofixed(2)};<br><br>';
+            result.innerHTML += 'Produto ${contador + 1}: ${produtos[contador]} <br>Preço de compra: R$ ${precos[contador].toFixed(2)}. Vender por R$ ${(precos[contador] * 1.25).toFixed(2)}<br><br>';
         }
     }
 </script>
